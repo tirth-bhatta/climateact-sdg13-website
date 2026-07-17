@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Editor - Student 1 | ClimateAct</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+  <style>
+    /* Page Editor has its own styling - looser match to website theme */
+    :root {
+      --green: #1a6b3c;
+      --amber: #f0a500;
+      --dark:  #1a1a14;
+      --muted: #5a5a50;
+      --bg:    #f5f5f0;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; font-size: 15px; }
+    a { color: var(--green); }
+    a:hover { color: var(--amber); }
+
+    /* Top bar */
+    .pe-topbar { background: var(--green); color: #fff; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .pe-topbar h1 { font-size: 1.2rem; }
+    .pe-topbar span { font-size: 0.8rem; opacity: 0.8; }
+
+    /* Table of contents */
+    .toc { background: var(--white); border-left: 4px solid var(--amber); padding: 1.25rem 1.5rem; margin: 2rem auto; max-width: 900px; border-radius: 0 8px 8px 0; }
+    .toc h2 { font-size: 1rem; color: var(--green); margin-bottom: 0.75rem; }
+    .toc ol { padding-left: 1.5rem; }
+    .toc li { margin-bottom: 0.35rem; font-size: 0.9rem; }
+
+    /* Main content */
+    .pe-body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+    /* Sections */
+    .pe-section { background: var(--white); border-radius: 10px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); scroll-margin-top: 60px; }
+    .pe-section h2 { color: var(--green); font-size: 1.3rem; border-bottom: 2px solid var(--amber); padding-bottom: 0.5rem; margin-bottom: 1.25rem; }
+    .pe-section h3 { color: var(--dark); font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+    .pe-section p  { color: var(--muted); margin-bottom: 0.75rem; }
+    .pe-section ul { padding-left: 1.4rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .pe-section li { margin-bottom: 0.3rem; }
+
+    /* Code snippet styling */
+    code { background: #f0f0e8; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; color: var(--green); }
+
+    /* Table for meeting log */
+    .meeting-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .meeting-table th { background: var(--green); color: #fff; padding: 0.65rem 0.75rem; text-align: left; }
+    .meeting-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #e8e8e0; vertical-align: top; }
+    .meeting-table tr:nth-child(even) td { background: #f8f8f2; }
+
+    /* Page links */
+    .page-link { display: inline-block; background: var(--green); color: #fff !important; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; margin: 0.4rem 0.3rem 0.4rem 0; text-decoration: none; transition: background 0.2s; }
+    .page-link:hover { background: #0f4527; color: #fff !important; }
+
+    /* Back to top */
+    .back-top { text-align: right; margin-top: 1rem; }
+    .back-top a { font-size: 0.8rem; color: var(--muted); }
+
+    footer { background: var(--dark); color: #888; text-align: center; padding: 1.5rem; font-size: 0.82rem; }
+    footer a { color: var(--amber); }
+  </style>
+</head>
+<body>
+
+<span id="top"></span>
+
+<!-- Top bar -->
+<div class="pe-topbar">
+  <h1>Page Editor — Student 1</h1>
+  <span>ClimateAct · SDG 13 · University of Westminster</span>
+</div>
+
+<!-- Table of contents -->
+<nav class="toc" aria-label="Page Editor contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#overview">Student Overview</a></li>
+    <li><a href="#template">Shared Template &amp; Global CSS</a></li>
+    <li><a href="#home">Home Page</a></li>
+    <li><a href="#gallery">Gallery Page</a></li>
+    <li><a href="#content">Content Page</a></li>
+    <li><a href="#challenges">Challenges &amp; Lessons Learned</a></li>
+    <li><a href="#accessibility">Accessibility Considerations</a></li>
+    <li><a href="#compliance">JANET Compliance</a></li>
+    <li><a href="#meetings">Group Meetings &amp; Contribution Log</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</nav>
+
+<div class="pe-body">
+
+  <!-- 1. Overview -->
+  <section class="pe-section" id="overview">
+    <h2>1. Student Overview</h2>
+    <p><strong>Name:</strong> [Your Full Name]</p>
+    <p><strong>Student ID:</strong> [w00000000]</p>
+    <p><strong>Role:</strong> Student 1 — Template, Navigation, Home Page, Gallery</p>
+    <h3>Completed Pages / Tasks</h3>
+    <ul>
+      <li>Shared HTML Template (base structure used by all students)</li>
+      <li>Global CSS file (<code>style.css</code>) — shared with all team members</li>
+      <li>Navigation bar implementation</li>
+      <li>Home Page (<code>home.html</code>)</li>
+      <li>Gallery Page (<code>gallery.html</code>)</li>
+      <li>Content Page (<code>content_ST1.html</code>) — The Science of Climate Change</li>
+      <li>Page Editor (<code>pageEditor_ST1.html</code>)</li>
+      <li>Validation Page (<code>validation_ST1.html</code>)</li>
+    </ul>
+    <a href="home.html" target="_blank" class="page-link">View Home Page ↗</a>
+    <a href="gallery.html" target="_blank" class="page-link">View Gallery ↗</a>
+    <a href="content_ST1.html" target="_blank" class="page-link">View Content Page ↗</a>
+  </section>
+
+  <!-- 2. Template & CSS -->
+  <section class="pe-section" id="template">
+    <h2>2. Shared Template &amp; Global CSS</h2>
+    <p>As Student 1, I was responsible for creating the shared HTML template structure and the global CSS file used by all team members.</p>
+    <h3>HTML Structure</h3>
+    <p>The base template uses semantic HTML5 elements:</p>
+    <ul>
+      <li><code>&lt;header&gt;</code> — contains the site logo and navigation bar</li>
+      <li><code>&lt;nav&gt;</code> — navigation links to all main pages</li>
+      <li><code>&lt;main&gt;</code> — placeholder for page-specific content</li>
+      <li><code>&lt;footer&gt;</code> — site-wide footer with Page Editor and Validation links</li>
+    </ul>
+    <h3>CSS Techniques</h3>
+    <p>The global CSS uses CSS custom properties (<code>:root</code> variables) to define the colour palette, ensuring consistent colours site-wide. I used Flexbox for the header and footer layouts, and CSS Grid for card grids and the footer columns. A sticky header (<code>position: sticky; top: 0</code>) keeps navigation accessible while scrolling.</p>
+    <h3>Design Rationale</h3>
+    <p>I chose a deep forest green (<code>#1a6b3c</code>) as the primary colour to evoke nature and environmental themes aligned with SDG 13. The warm amber accent (<code>#f0a500</code>) creates contrast and highlights calls to action. The Space Grotesk typeface provides a modern, readable feel, while Playfair Display adds character to headings.</p>
+    <a href="validation_ST1.html#template-validation" target="_blank" class="page-link">See Template Validation ↗</a>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 3. Home Page -->
+  <section class="pe-section" id="home">
+    <h2>3. Home Page</h2>
+    <h3>HTML Structure</h3>
+    <p>The Home Page uses the shared template, adding a hero <code>&lt;section&gt;</code>, a statistics strip <code>&lt;div&gt;</code>, a mission cards <code>&lt;section&gt;</code>, and an interactive gallery <code>&lt;section&gt;</code>. Card content is wrapped in <code>&lt;article&gt;</code> elements for semantic clarity. The gallery tiles use <code>&lt;a&gt;</code> elements for accessibility and SEO.</p>
+    <h3>CSS Techniques</h3>
+    <p>The page uses embedded CSS within a <code>&lt;style&gt;</code> block in the <code>&lt;head&gt;</code>. This embedded CSS covers five required rules: (1) hero section gradient background and animation; (2) CSS keyframe animation for the hero overlay; (3) gallery tile hover effects including image scale and overlay transitions; (4) statistics strip grid layout; and (5) highlight list styling with custom arrows.</p>
+    <h3>Design Rationale</h3>
+    <p>The full-width hero was chosen to immediately communicate the urgency of climate action. The statistics strip creates an emotional impact before the user reads the detail cards. The interactive gallery tiles provide visual entry points to each team member's content page, encouraging exploration.</p>
+    <a href="home.html" target="_blank" class="page-link">View Home Page ↗</a>
+    <a href="validation_ST1.html#home-validation" target="_blank" class="page-link">See Home Validation ↗</a>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 4. Gallery Page -->
+  <section class="pe-section" id="gallery">
+    <h2>4. Gallery Page</h2>
+    <h3>HTML Structure</h3>
+    <p>The Gallery page uses the shared template. The <code>&lt;main&gt;</code> section contains a page hero and a thumbnail grid. Each gallery item is a <code>&lt;div class="thumb-card"&gt;</code> with a <code>data-id</code> attribute linking it to a JavaScript data array. A modal dialog is implemented using a fixed-position <code>&lt;div&gt;</code> with <code>role="dialog"</code> and <code>aria-modal="true"</code>.</p>
+    <h3>JavaScript Implementation</h3>
+    <p>All gallery interactivity is implemented with JavaScript:</p>
+    <ul>
+      <li><strong>Hover detection:</strong> <code>mouseenter</code> and <code>mouseleave</code> event listeners set a <code>data-hovered</code> attribute; CSS transitions provide the visual response.</li>
+      <li><strong>Click-to-expand:</strong> A <code>click</code> event listener calls <code>openModal(id)</code> which populates the modal with the correct data from the <code>galleryData</code> array.</li>
+      <li><strong>Close/collapse:</strong> Close button, backdrop click, and Escape key all call <code>closeModal()</code>.</li>
+      <li><strong>User customisation:</strong> Colour scheme and font dropdowns use <code>change</code> listeners to call <code>applyCustomisation()</code>, which sets inline styles on the modal content area.</li>
+    </ul>
+    <h3>CSS Techniques</h3>
+    <p>Embedded CSS handles the thumbnail card hover effects, modal animation (<code>@keyframes modalIn</code>), and the modal control bar styling. Transitions on <code>transform</code> and <code>box-shadow</code> give cards a lift effect. Page-specific colour is applied to the gallery hero banner.</p>
+    <a href="gallery.html" target="_blank" class="page-link">View Gallery ↗</a>
+    <a href="validation_ST1.html#gallery-validation" target="_blank" class="page-link">See Gallery Validation ↗</a>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 5. Content Page -->
+  <section class="pe-section" id="content">
+    <h2>5. Content Page — The Science of Climate Change</h2>
+    <h3>HTML Structure</h3>
+    <p>The content page is divided into five sections using <code>&lt;section&gt;</code> elements, each with a unique <code>id</code> for internal anchor linking. A sticky sidebar navigation uses <code>&lt;aside&gt;</code> with anchor links. The two-column layout uses CSS Grid (<code>grid-template-columns: 220px 1fr</code>).</p>
+    <h3>Internal Navigation</h3>
+    <p>Internal links use <code>href="#section-id"</code> anchors that target <code>id</code> attributes on each section. <code>scroll-margin-top</code> offsets scrolling to account for the sticky header. The Go-to-Top button uses <code>href="#top"</code> and <code>position: fixed</code> CSS — no JavaScript required.</p>
+    <h3>Images</h3>
+    <p>Four contextual images are used, each with descriptive <code>alt</code> text and <code>onerror</code> fallbacks. Images have <code>border-radius</code>, <code>box-shadow</code>, and responsive <code>width: 100%</code> applied through page-specific CSS.</p>
+    <a href="content_ST1.html" target="_blank" class="page-link">View Content Page ↗</a>
+    <a href="validation_ST1.html#content-validation" target="_blank" class="page-link">See Content Validation ↗</a>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 6. Challenges -->
+  <section class="pe-section" id="challenges">
+    <h2>6. Challenges &amp; Lessons Learned</h2>
+    <h3>Challenge 1: Modal Accessibility</h3>
+    <p>Implementing an accessible modal was more complex than expected. I initially omitted <code>aria-modal</code> and focus management. After research I added <code>aria-modal="true"</code>, <code>role="dialog"</code>, and focus transfer to the close button on open, which resolves the issue for screen reader users.</p>
+    <h3>Challenge 2: Sticky Navigation Offset</h3>
+    <p>When using internal anchor links with a sticky header, sections were being hidden behind the header. I resolved this by applying <code>scroll-margin-top: 90px</code> to each <code>.article-section</code>, which offsets the scroll target by the header height.</p>
+    <h3>Challenge 3: Team CSS Coordination</h3>
+    <p>Distributing the global CSS to team members and ensuring nobody accidentally overrode shared styles required clear communication. I added HTML comments marking which sections must not be modified, and a shared design brief document.</p>
+    <h3>What I Learned</h3>
+    <p>This project deepened my understanding of semantic HTML, CSS custom properties, and how JavaScript event delegation works. I also learned the importance of planning folder structure and naming conventions early in a group project to avoid broken links.</p>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 7. Accessibility -->
+  <section class="pe-section" id="accessibility">
+    <h2>7. Accessibility Considerations</h2>
+    <p>Accessibility was considered throughout development, in line with WCAG 2.1 guidelines:</p>
+    <ul>
+      <li><strong>Alternative text:</strong> All images include descriptive <code>alt</code> attributes. Decorative images use <code>alt=""</code>.</li>
+      <li><strong>Semantic HTML:</strong> <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>, and <code>&lt;section&gt;</code> provide a logical document outline for screen readers.</li>
+      <li><strong>Keyboard navigation:</strong> Gallery thumbnails have <code>tabindex="0"</code> and respond to Enter/Space key events. The modal close button receives focus on open.</li>
+      <li><strong>ARIA attributes:</strong> The modal uses <code>role="dialog"</code>, <code>aria-modal="true"</code>, and <code>aria-labelledby</code>. Navigation uses <code>aria-label</code>.</li>
+      <li><strong>Colour contrast:</strong> The chosen green/white combination meets WCAG AA contrast requirements. Text on the amber background uses dark green for adequate contrast.</li>
+      <li><strong>Responsive design:</strong> The layout adapts to mobile viewports, ensuring usability across device sizes.</li>
+    </ul>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 8. JANET Compliance -->
+  <section class="pe-section" id="compliance">
+    <h2>8. Compliance with JANET Regulations</h2>
+    <p>All pages published to the University web server comply with JANET regulations for responsible web publishing:</p>
+    <ul>
+      <li><strong>Appropriate content:</strong> All content is educational, factually grounded, and aligned with the SDG 13 theme. No offensive, discriminatory, or illegal content is present.</li>
+      <li><strong>External resources:</strong> All images used are royalty-free (sourced from iStockPhoto or similar); each is referenced in this Page Editor. No copyrighted content has been reproduced without permission.</li>
+      <li><strong>Academic integrity:</strong> All written content is original and authored by myself. No text has been copied from the UN SDGs website or other sources without proper attribution. Any AI assistance has been acknowledged per university guidelines.</li>
+      <li><strong>Privacy:</strong> No personal data from third parties is collected or stored by the website.</li>
+      <li><strong>Professional conduct:</strong> The website promotes a positive, constructive message aligned with the University's Being Westminster strategy.</li>
+    </ul>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 9. Group Meetings Log -->
+  <section class="pe-section" id="meetings">
+    <h2>9. Group Meetings &amp; Contribution Log</h2>
+    <p>A minimum of six group meetings were held during development. My individual contributions at each meeting are recorded below:</p>
+
+    <table class="meeting-table" aria-label="Group meeting log">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date &amp; Time</th>
+          <th>Format</th>
+          <th>Objective</th>
+          <th>Attended</th>
+          <th>My Individual Contribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>9 Feb 2026, 2pm</td>
+          <td>Face-to-face</td>
+          <td>Choose SDG &amp; assign roles</td>
+          <td>Yes</td>
+          <td>Proposed SDG 13 and agreed to take on the Template, Home, and Gallery pages.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>16 Feb 2026, 3pm</td>
+          <td>Online (Teams)</td>
+          <td>Agree visual design &amp; colour palette</td>
+          <td>Yes</td>
+          <td>Proposed the green and amber colour scheme. Shared initial CSS variable definitions for approval.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>23 Feb 2026, 2pm</td>
+          <td>Face-to-face</td>
+          <td>Share template with team</td>
+          <td>Yes</td>
+          <td>Distributed the HTML template and style.css to all students. Walked the team through how to integrate their pages.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>2 Mar 2026, 4pm</td>
+          <td>Online (Teams)</td>
+          <td>Progress review — mid-point check</td>
+          <td>Yes</td>
+          <td>Presented the completed Home Page and first draft of the Gallery. Reviewed Student 3's feedback page integration.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>10 Mar 2026, 2pm</td>
+          <td>Hybrid</td>
+          <td>Resolve broken navigation links</td>
+          <td>Yes</td>
+          <td>Identified inconsistent file names causing broken nav links. Created a shared naming reference document.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>17 Mar 2026, 3pm</td>
+          <td>Face-to-face</td>
+          <td>Final review &amp; submission prep</td>
+          <td>Yes</td>
+          <td>Ran HTML validation on all my pages. Corrected two missing alt attributes identified in the gallery. Confirmed all server upload paths.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- 10. References -->
+  <section class="pe-section" id="references">
+    <h2>10. References</h2>
+    <ul>
+      <li id="ref-1">Economou, D. (2025/26) <em>4COSC011W Web Design and Development Lecture Notes</em>. University of Westminster.</li>
+      <li id="ref-2">MDN Web Docs (2024) <em>HTML elements reference</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank" rel="noopener">https://developer.mozilla.org</a> [Accessed March 2026].</li>
+      <li id="ref-3">MDN Web Docs (2024) <em>CSS reference</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener">https://developer.mozilla.org</a> [Accessed March 2026].</li>
+      <li id="ref-4">W3C (2018) <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">https://www.w3.org/TR/WCAG21/</a> [Accessed March 2026].</li>
+      <li id="ref-5">IPCC (2021) <em>Sixth Assessment Report: The Physical Science Basis</em>. Available at: <a href="https://www.ipcc.ch/report/ar6/wg1/" target="_blank" rel="noopener">https://www.ipcc.ch</a> [Accessed March 2026].</li>
+      <li id="ref-6">Google Fonts (2024) <em>Space Grotesk and Playfair Display typefaces</em>. Available at: <a href="https://fonts.google.com" target="_blank" rel="noopener">https://fonts.google.com</a> [Accessed February 2026].</li>
+    </ul>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+</div><!-- /pe-body -->
+
+<footer>
+  <p><a href="validation_ST1.html">Validation Page</a> · Dipak Kumar Raut  · w2121999 · University of Westminster · 2026</p>
+</footer>
+
+</body>
+</html>

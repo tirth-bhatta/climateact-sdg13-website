@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation Page - Student 2 - Climate Action</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header bar */
+        .val-header {
+            background-color: #1b5e20;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        .val-header h1 {
+            margin: 0 0 6px;
+            font-size: 26px;
+        }
+
+        .val-header p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        /* Main content wrapper */
+        .val-container {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 30px 60px;
+        }
+
+        /* Internal navigation */
+        .toc {
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 36px;
+        }
+
+        .toc h2 {
+            border: none;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #1b5e20;
+        }
+
+        .toc ol {
+            margin: 0 0 0 18px;
+            padding: 0;
+        }
+
+        .toc li {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        .toc a {
+            color: #1b5e20;
+            text-decoration: none;
+        }
+
+        .toc a:hover { text-decoration: underline; }
+
+        /* Section styling */
+        section {
+            margin-bottom: 50px;
+            padding-top: 10px;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #1b5e20;
+            border-bottom: 2px solid #c8e6c9;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+        }
+
+        p, li {
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Validation screenshot box */
+        .screenshot-box {
+            border: 2px dashed #a5d6a7;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+            margin: 14px 0;
+            color: #555;
+        }
+
+        .screenshot-box img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .screenshot-caption {
+            font-size: 13px;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Pass status badge */
+        .status-pass {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Link to page editor */
+        .pe-link {
+            display: inline-block;
+            margin: 6px 0 14px;
+            padding: 7px 16px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .pe-link:hover { background-color: #1b5e20; }
+
+        /* Fixed back to top button */
+        #topBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2e7d32;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* FIX: Added hover effect to the Back to Top button */
+        #topBtn:hover {
+            background: #1b5e20;
+        }
+
+        /* Footer */
+        .val-footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        .val-footer a {
+            color: #a5d6a7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="val-header">
+    <h1>Validation Page &mdash; Student 2</h1>
+    <p>Evidence of HTML validation for all pages implemented by Student 2.</p>
+</div>
+
+<div class="val-container">
+
+    <!-- Internal navigation -->
+    <nav class="toc" aria-label="Validation Contents">
+        <h2>Contents</h2>
+        <ol>
+            <li><a href="#val-splash">Splash Screen Validation</a></li>
+            <li><a href="#val-ais">Action Impact Simulator Validation</a></li>
+            <li><a href="#val-content">Content Page Validation</a></li>
+            <li><a href="#val-reflection">Reflection on Validation</a></li>
+        </ol>
+    </nav>
+
+    <p>
+        All pages below were validated using the
+        <strong>W3C Markup Validation Service</strong> at
+        <a href="https://validator.w3.org/" target="_blank">https://validator.w3.org/</a>.
+        Validation was performed by pasting the page's source code directly into the validator
+        (using the "Validate by Direct Input" option). Screenshots of the validation results
+        are provided below as evidence. The pages were validated by Student 2 only &mdash; the
+        Page Editor and Validation pages themselves are excluded as per the coursework brief.
+    </p>
+
+    <!-- Section 1: Splash screen validation -->
+    <section id="val-splash">
+        <h2>1. Splash Screen (<code>splash.html</code>)</h2>
+
+        <span class="status-pass">&#10003; No Errors</span>
+        <p>
+            The Splash Screen was validated successfully with no errors.
+            A minor warning is present relating to the use of the
+            <code>id</code> attribute on the <code>&lt;meta&gt;</code> refresh tag. This
+            warning does not affect the page's functionality or validity, and warnings
+            are acceptable per the coursework brief.
+        </p>
+
+        <p>
+            <a href="pageEditor_ST2.html#splash-technical" class="pe-link" target="_blank">
+                &#128279; View technical description in Page Editor
+            </a>
+        </p>
+
+        <!-- Screenshot of W3C validation result for splash.html -->
+        <div class="screenshot-box">
+            <!-- Replace src with actual W3C screenshot for splash.html -->
+            <img src="images/val-splash.png"
+                 alt="Screenshot of W3C validator showing no errors for splash.html"
+                 width="800" height="450">
+            <p class="screenshot-caption">
+                Figure 1: W3C Validation result for splash.html &mdash; No errors found.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2: AIS validation -->
+    <section id="val-ais">
+        <h2>2. Action Impact Simulator (<code>ais.html</code>)</h2>
+
+        <span class="status-pass">&#10003; No Errors</span>
+        <p>
+            The Action Impact Simulator page was validated successfully with no errors.
+            The page uses a single <code>&lt;h1&gt;</code> as the main page title, following
+            the correct heading hierarchy required for accessibility. Any warnings relate to
+            the use of <code>onclick</code> attributes which are required for the JavaScript
+            interactivity specified in the coursework brief and do not represent validation errors.
+        </p>
+
+        <p>
+            <a href="pageEditor_ST2.html#ais-technical" class="pe-link" target="_blank">
+                &#128279; View technical description in Page Editor
+            </a>
+        </p>
+
+        <!-- Screenshot of W3C validation result for ais.html -->
+        <div class="screenshot-box">
+            <!-- Replace src with actual W3C screenshot for ais.html -->
+            <img src="images/val-ais.png"
+                 alt="Screenshot of W3C validator showing no errors for ais.html"
+                 width="800" height="450">
+            <p class="screenshot-caption">
+                Figure 2: W3C Validation result for ais.html &mdash; No errors found.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3: Content page validation -->
+    <section id="val-content">
+        <h2>3. Content Page (<code>content_ST2.html</code>)</h2>
+
+        <span class="status-pass">&#10003; No Errors</span>
+        <p>
+            The Content Page was validated successfully with no errors. The page
+            structure is semantic and well-formed, using a correct heading hierarchy
+            (one <code>&lt;h1&gt;</code>, followed by <code>&lt;h2&gt;</code> and
+            <code>&lt;h3&gt;</code> in order), appropriate internal anchor links,
+            and five images all with descriptive <code>alt</code> text.
+        </p>
+
+        <p>
+            <a href="pageEditor_ST2.html#content-technical" class="pe-link" target="_blank">
+                &#128279; View technical description in Page Editor
+            </a>
+        </p>
+
+        <!-- Screenshot of W3C validation result for content_ST2.html -->
+        <div class="screenshot-box">
+            <!-- Replace src with actual W3C screenshot for content_ST2.html -->
+            <img src="images/val-content.png"
+                 alt="Screenshot of W3C validator showing no errors for content_ST2.html"
+                 width="800" height="450">
+            <p class="screenshot-caption">
+                Figure 3: W3C Validation result for content_ST2.html &mdash; No errors found.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 4: Reflection on validation -->
+    <section id="val-reflection">
+        <h2>4. Reflection on Validation</h2>
+
+        <h3>Errors Encountered</h3>
+        <p>
+            During initial validation of <code>ais.html</code>, the validator flagged
+            a missing <code>alt</code> attribute on one of the action card images. This was
+            quickly corrected by adding a descriptive <code>alt</code> text string to the
+            relevant <code>&lt;img&gt;</code> element.
+        </p>
+        <p>
+            A more significant issue on <code>ais.html</code> was the use of an
+            <code>&lt;h2&gt;</code> element as the main page title instead of an
+            <code>&lt;h1&gt;</code>. This broke the heading hierarchy and was flagged
+            during accessibility review. It was corrected by changing the element to
+            <code>&lt;h1&gt;</code> and updating the associated CSS selector accordingly.
+        </p>
+        <p>
+            On <code>content_ST2.html</code>, the validator initially flagged a heading
+            hierarchy issue where an <code>&lt;h3&gt;</code> element was used before
+            an <code>&lt;h2&gt;</code> within the same section. This was corrected by
+            restructuring the headings into the correct logical order.
+        </p>
+
+        <h3>How Errors Were Resolved</h3>
+        <p>
+            I addressed each error systematically by reading the validator's line reference,
+            locating the issue in my code editor, making the correction, and re-running
+            validation until no errors remained. The process of iterative validation
+            significantly improved my understanding of valid HTML structure.
+        </p>
+
+        <h3>Lessons Learned</h3>
+        <p>
+            Validation taught me that small oversights &mdash; such as a missing attribute,
+            an out-of-order heading, or using the wrong heading level for a page title &mdash;
+            can prevent a page from meeting web standards. Running validation early and often
+            during development (rather than only at the end) makes fixing issues much quicker
+            and less stressful. I also learned that warnings are informational and do not
+            prevent successful validation.
+        </p>
+    </section>
+
+</div><!-- end .val-container -->
+
+<a href="#" id="topBtn">&#8679; Top</a>
+
+<!-- Footer: links to Page Editor and student details -->
+<div class="val-footer">
+    <p>
+        <a href="pageEditor_ST2.html">Page Editor &mdash; Tirth Raj Bhatta ~ Student ID: w2121964</a>
+    </p>
+    <p>Student 2 &mdash; Tirth Raj Bhatta &mdash; Web Design &amp; Development 2025/26</p>
+</div>
+
+</body>
+</html>

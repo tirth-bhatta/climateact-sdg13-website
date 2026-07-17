@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Editor - Student 3 | ClimateAct</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+  <style>
+    /* Page Editor Styling */
+    :root {
+      --green: #1a6b3c;
+      --amber: #f0a500;
+      --dark: #1a1a14;
+      --muted: #5a5a50;
+      --bg: #f5f5f0;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; font-size: 15px; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { color: var(--amber); }
+
+    .pe-topbar { background: var(--green); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .pe-topbar h1 { font-size: 1.2rem; }
+    .pe-topbar span { font-size: 0.8rem; opacity: 0.8; }
+
+    .toc { background: var(--white); border-left: 4px solid var(--amber); padding: 1.25rem 1.5rem; margin: 2rem auto; max-width: 1000px; border-radius: 0 8px 8px 0; }
+    .toc h2 { font-size: 1rem; color: var(--green); margin-bottom: 0.75rem; }
+    .toc ol { padding-left: 1.5rem; }
+    .toc li { margin-bottom: 0.35rem; font-size: 0.9rem; }
+
+    .pe-body { max-width: 1000px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+    .pe-section { background: var(--white); border-radius: 10px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); scroll-margin-top: 60px; }
+    .pe-section h2 { color: var(--green); font-size: 1.3rem; border-bottom: 2px solid var(--amber); padding-bottom: 0.5rem; margin-bottom: 1.25rem; }
+    .pe-section h3 { color: var(--dark); font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+    .pe-section p { color: var(--muted); margin-bottom: 0.75rem; }
+    .pe-section ul { padding-left: 1.4rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .pe-section li { margin-bottom: 0.3rem; }
+
+    .page-link { display: inline-block; background: var(--green); color: #fff !important; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; margin: 0.4rem 0.3rem 0.4rem 0; transition: background 0.2s; }
+    .page-link:hover { background: #0f4527; color: #fff !important; }
+
+    .meeting-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
+    .meeting-table th { background: var(--green); color: #fff; padding: 0.65rem 0.75rem; text-align: left; }
+    .meeting-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #e8e8e0; vertical-align: top; }
+    .meeting-table tr:nth-child(even) td { background: #f8f8f2; }
+
+    .back-top { text-align: right; margin-top: 1rem; }
+    .back-top a { font-size: 0.8rem; color: var(--muted); }
+
+    footer { background: var(--dark); color: #888; text-align: center; padding: 1.5rem; font-size: 0.82rem; }
+    footer a { color: var(--amber); }
+  </style>
+</head>
+<body>
+
+<span id="top"></span>
+
+<div class="pe-topbar">
+  <h1>Page Editor — Student 3</h1>
+  <span>ClimateAct · SDG 13 · University of Westminster</span>
+</div>
+
+<nav class="toc">
+  <h2>📑 Contents</h2>
+  <ol>
+    <li><a href="#overview">Student Overview</a></li>
+    <li><a href="#feedback">Feedback & Program Directory</a></li>
+    <li><a href="#team">Team Page</a></li>
+    <li><a href="#content">Content Page (Sustainable Transport)</a></li>
+    <li><a href="#challenges">Challenges & Lessons Learned</a></li>
+    <li><a href="#accessibility">Accessibility Considerations</a></li>
+    <li><a href="#compliance">JANET Compliance</a></li>
+    <li><a href="#meetings">Group Meetings & Contribution Log</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</nav>
+
+<div class="pe-body">
+
+  <!-- Section 1: Overview -->
+  <section class="pe-section" id="overview">
+    <h2>1. Student Overview</h2>
+    <p><strong>Name:</strong> Aryan Pratap Singh</p>
+    <p><strong>Student ID:</strong>w2121988</p>
+    <p><strong>Role:</strong> Student 3 — Feedback Page, Team Page, Content Page</p>
+    <h3>✅ Completed Pages / Tasks</h3>
+    <ul>
+      <li>Feedback & Program Directory (<code>feedback.html</code>)</li>
+      <li>Team Page (<code>team.html</code>)</li>
+      <li>Content Page — Sustainable Transport (<code>content_ST3.html</code>)</li>
+      <li>Page Editor (<code>pageEditor_ST3.html</code>)</li>
+      <li>Validation Page (<code>validation_ST3.html</code>)</li>
+    </ul>
+    <a href="feedback.html" target="_blank" class="page-link">View Feedback Page ↗</a>
+    <a href="team.html" target="_blank" class="page-link">View Team Page ↗</a>
+    <a href="content_ST3.html" target="_blank" class="page-link">View Content Page ↗</a>
+  </section>
+
+  <!-- Section 2: Feedback Page -->
+  <section class="pe-section" id="feedback">
+    <h2>2. Feedback & Program Directory</h2>
+    <h3>HTML Structure</h3>
+    <p>The Feedback page uses the shared template from Student 1. The <code>&lt;main&gt;</code> section contains a scrollable program cards container, rating summary, reviews grid, and an interactive feedback form. I used <code>&lt;section&gt;</code> for the scrollable container and <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code> to group form fields as required.</p>
+    <h3>CSS Techniques</h3>
+    <p>Page-specific CSS includes styling for program cards, scrollable container (<code>max-height: 480px; overflow-y: auto</code>), review cards, and form validation error states. Custom scrollbar styling was added for better UX. Flexbox and CSS Grid were used for responsive layouts.</p>
+    <h3>JavaScript Implementation</h3>
+    <ul>
+      <li><strong>Live character counter:</strong> Updates in real-time as user types in the message field, with colour warnings when approaching the 300-character limit.</li>
+      <li><strong>Form validation:</strong> Checks required fields (name, email, programme, message) and validates email format. Error messages appear next to fields.</li>
+      <li><strong>Submission confirmation:</strong> On successful validation, a confirmation message appears and the form resets.</li>
+    </ul>
+    <h3>Design Rationale</h3>
+    <p>The scrollable program cards container allows users to browse multiple opportunities without overwhelming the page. The rating summary provides social proof, while review cards build trust. The form uses a clean, accessible layout with clear labels and real-time feedback to encourage submissions.</p>
+    <a href="validation_ST3.html#feedback-validation" target="_blank" class="page-link">See Feedback Validation ↗</a>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <!-- Section 3: Team Page -->
+  <section class="pe-section" id="team">
+    <h2>3. Team Page</h2>
+    <h3>HTML Structure</h3>
+    <p>The Team Page displays four team member cards using a responsive grid. Each card contains an image, name, role, and an expandable details section. I added <code>tabindex="0"</code> and <code>role="button"</code>

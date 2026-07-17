@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>ClimateAct - Sustainable Transport | SDG 13</title>
+  <link rel="stylesheet" href="style.css" >
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* Content page specific styles */
+    .content-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #0f4527 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .content-hero h1 { color: var(--white); margin-bottom: 0.75rem; }
+    .content-hero p { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; }
+
+    /* Two-column layout for content */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+      #side-nav {
+        display: none;
+      }
+    }
+
+    /* Sticky Sidebar Navigation */
+    #side-nav {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    #side-nav h4 {
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 0.5rem;
+    }
+
+    #side-nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: var(--neutral-700);
+      font-size: 0.85rem;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    #side-nav a:hover {
+      border-left-color: var(--primary);
+      color: var(--primary);
+      background: var(--neutral-100);
+    }
+
+    /* Article Sections */
+    .article-section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 90px;
+    }
+
+    .article-section h2 {
+      color: var(--primary-dark);
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-section h3 {
+      color: var(--primary);
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    .article-section p {
+      color: var(--neutral-700);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /* Content Images */
+    .content-img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      margin: 1.25rem 0;
+    }
+
+    .img-caption {
+      font-size: 0.75rem;
+      color: var(--neutral-400);
+      text-align: center;
+      margin-top: -0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Statistics Box */
+    .stat-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      color: var(--secondary);
+    }
+
+    /* Go to Top Button */
+    #go-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      background: var(--primary);
+      color: var(--white);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      transition: all 0.2s;
+      z-index: 100;
+    }
+
+    #go-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .highlight-list {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .highlight-list li {
+      margin-bottom: 0.5rem;
+      color: var(--neutral-700);
+    }
+  </style>
+</head>
+<body>
+
+  <span id="top"></span>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="content-hero">
+      <span class="gap-badge">Student 3 · Content Page</span>
+      <h1 class="mt-2">Sustainable Transport: The Future of Mobility</h1>
+      <p>How shifting to low-carbon transport can reduce emissions and create healthier cities</p>
+    </div>
+
+    <div class="content-layout">
+      <!-- Sidebar Internal Navigation -->
+      <aside id="side-nav">
+        <h4>On this page</h4>
+        <a href="#section1">🚲 The Problem</a>
+        <a href="#section2">⚡ Electric Revolution</a>
+        <a href="#section3">🚆 Public Transport</a>
+        <a href="#section4">🚶 Active Travel</a>
+        <a href="#section5">🌍 Student Action</a>
+      </aside>
+
+      <!-- Main Content -->
+      <article>
+
+        <!-- Section 1 -->
+        <section class="article-section" id="section1">
+          <h2>The Transport Problem</h2>
+          <img class="content-img" src="https://i.pinimg.com/736x/38/15/05/381505d637b044e6d1be1c0656a8825c.jpg" alt="City traffic jam with cars emitting exhaust fumes" onerror="this.src='https://placehold.co/800x400/1a6b3c/fff?text=City+Traffic'">
+          <p class="img-caption">Figure 1: Urban traffic congestion contributes significantly to CO₂ emissions.</p>
+          <p>Transport accounts for approximately <strong>24% of global CO₂ emissions</strong>, with road vehicles responsible for nearly three-quarters of this figure. In cities, transport can contribute up to 40% of local air pollution, directly affecting public health. The reliance on private vehicles powered by fossil fuels is not only unsustainable but also creates congestion, noise pollution, and reduces quality of life in urban areas.</p>
+          <div class="stat-box">
+            <span class="stat-number">24%</span>
+            <p>of global CO₂ emissions come from transport</p>
+          </div>
+          <p>The good news is that solutions exist. By shifting to sustainable transport options, we can dramatically reduce emissions while creating more liveable, healthier communities.</p>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="article-section" id="section2">
+          <h2>The Electric Revolution</h2>
+          <img class="content-img" src="https://i.pinimg.com/1200x/b9/29/6a/b9296a5396ed4ab8b39510f78aa6e4ea.jpg" alt="Electric vehicles charging at a public charging station" onerror="this.src='https://placehold.co/800x400/0f4527/fff?text=EV+Charging'">
+          <p class="img-caption">Figure 2: Electric vehicle charging stations are becoming increasingly common.</p>
+          <p>Electric vehicles (EVs) are transforming personal mobility. With zero tailpipe emissions, EVs eliminate local air pollution and, when charged with renewable electricity, offer a pathway to near-zero carbon transport. Battery costs have fallen by <strong>over 80% since 2010</strong>, making EVs increasingly affordable. The UK government has committed to ending the sale of new petrol and diesel cars by 2035.</p>
+          <h3>Charging Infrastructure</h3>
+          <p>Expanding charging networks is crucial for EV adoption. Universities and workplaces are installing charging points, making it easier for students and staff to make the switch. Many cities now offer dedicated EV parking and reduced congestion charges.</p>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="article-section" id="section3">
+          <h2>Public Transport: The Backbone of Sustainable Cities</h2>
+          <img class="content-img" src="https://i.pinimg.com/736x/9d/0a/82/9d0a826cd410459aa923ca3db923c1b9.jpg" alt="Modern electric bus on a city street" onerror="this.src='https://placehold.co/800x400/2e9e5b/fff?text=Electric+Bus'">
+          <p class="img-caption">Figure 3: Electric buses reduce emissions and improve air quality in cities.</p>
+          <p>Well-designed public transport systems can move large numbers of people efficiently and with minimal emissions. A full bus can replace up to <strong>50 cars</strong>; a train can replace hundreds. Cities like London, Paris, and Singapore have invested heavily in expanding metro networks, bus rapid transit, and cycling infrastructure.</p>
+          <ul class="highlight-list">
+            <li>London's Ultra Low Emission Zone (ULEZ) has reduced NO₂ emissions by 44%</li>
+            <li>Electric buses are now operating in over 50 UK cities</li>
+            <li>Student railcards offer 1/3 off train travel for young people</li>
+          </ul>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="article-section" id="section4">
+          <h2>Active Travel: Walking and Cycling</h2>
+          <img class="content-img" src="https://i.pinimg.com/1200x/81/16/a9/8116a9771341ca87ea6affc3244b00ce.jpg" alt="Dedicated cycle lane with cyclists in a city" onerror="this.src='https://placehold.co/800x400/1a6b3c/fff?text=Cycling'">
+          <p class="img-caption">Figure 4: Dedicated cycling infrastructure encourages active travel.</p>
+          <p>Walking and cycling produce zero emissions and offer significant health benefits. Studies show that active commuting reduces the risk of cardiovascular disease by up to 30%. Many universities are investing in secure bike storage, cycle hire schemes, and pedestrian-friendly campuses to encourage active travel.</p>
+          <div class="stat-box">
+            <span class="stat-number">30%</span>
+            <p>Reduced risk of heart disease with active commuting</p>
+          </div>
+          <p>If just 10% of short car journeys were replaced by walking or cycling, urban CO₂ emissions would drop by an estimated 5 million tonnes annually in the UK alone.</p>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="article-section" id="section5">
+          <h2>What Students Can Do</h2>
+          <p>As a student, you have the power to influence transport choices on campus and beyond:</p>
+          <ul class="highlight-list">
+            <li><strong>Choose sustainable transport</strong> - Walk, cycle, or use public transport for your daily commute</li>
+            <li><strong>Use university bike schemes</strong> - Many universities offer free cycle training and bike maintenance</li>
+            <li><strong>Advocate for better infrastructure</strong> - Join campaigns for safer cycle lanes and improved bus services</li>
+            <li><strong>Car-share when needed</strong> - If driving is necessary, share rides to reduce emissions</li>
+            <li><strong>Support campus initiatives</strong> - Get involved with sustainability committees and transport planning</li>
+          </ul>
+          <a href="ais.html" class="btn btn-primary mt-2">Try the Action Simulator →</a>
+        </section>
+
+      </article>
+    </div>
+
+    <a href="#top" id="go-top" aria-label="Back to top">↑</a>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Student 3</h4>
+        <a href="pageEditor_ST3.html">Page Editor</a>
+        <a href="validation_ST3.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster ·Aryan Pratap Singh · Student ID: w2121988</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+</body>
+</html>

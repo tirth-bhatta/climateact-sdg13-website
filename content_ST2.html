@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateAct - Understanding Climate Action | SDG 13</title>
+
+    <!-- Global CSS shared across all team pages -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+    <!-- Page-specific CSS for content_ST2 - Matching homepage theme -->
+    <style>
+        /* Hero Section - Matching homepage style */
+        .content-hero {
+            background: linear-gradient(135deg, #1a3a2a 0%, #0f2a1a 100%);
+            color: var(--white);
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(240, 165, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(26, 58, 42, 0.3) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .content-hero h1 {
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .content-hero p {
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Badge - Matching homepage */
+        .hero-badge {
+            display: inline-block;
+            background: #f0a500;
+            color: #1a3a2a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Internal Navigation (Table of Contents) - Matching card style */
+        .internal-nav {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #f0a500;
+        }
+
+        .internal-nav h2 {
+            font-size: 1rem;
+            color: #1a4a2a;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .internal-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .internal-nav ul li {
+            margin: 0;
+        }
+
+        .internal-nav ul li a {
+            color: #4a5a4a;
+            font-size: 0.85rem;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            display: inline-block;
+            background: #f8f5ef;
+        }
+
+        .internal-nav ul li a:hover {
+            background: #f0a500;
+            color: #1a3a2a;
+            transform: translateY(-2px);
+        }
+
+        /* Content Section Styling */
+        .content-section {
+            margin-bottom: 3rem;
+            padding-top: 0.5rem;
+            scroll-margin-top: 80px;
+        }
+
+        /* Section h2 with amber underline - Matching homepage */
+        .content-section h2 {
+            color: #1a4a2a;
+            border-bottom: 3px solid #f0a500;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.6rem;
+            font-family: var(--font-display);
+        }
+
+        /* Section h3 */
+        .content-section h3 {
+            color: #2a6a3a;
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.2rem;
+            font-family: var(--font-display);
+        }
+
+        .content-section p {
+            color: #4a5a4a;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        /* Bullet Lists - Styled like homepage */
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            color: #4a5a4a;
+            line-height: 1.6;
+        }
+
+        .content-section ul li::before {
+            content: '🌱';
+            position: absolute;
+            left: 0;
+            color: #f0a500;
+        }
+
+        /* Content Images - Styled like homepage cards */
+        .content-img {
+            width: 100%;
+            max-width: 650px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: var(--radius-md);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border: 2px solid rgba(240, 165, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            border-color: #f0a500;
+        }
+
+        /* Image Caption */
+        .img-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #8a9a8a;
+            margin-top: -0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Go to Top Button - Matching homepage button style */
+        #topBtn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: #1a4a2a;
+            color: var(--white);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            z-index: 999;
+        }
+
+        #topBtn:hover {
+            background: #f0a500;
+            color: #1a3a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #f8f5ef 0%, #ffffff 100%);
+            border-left: 4px solid #f0a500;
+            border-radius: var(--radius-sm);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #4a5a4a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .quote-box p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .quote-box cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #f0a500;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Fact Box */
+        .fact-box {
+            background: #e8f5e9;
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-left: 4px solid #f0a500;
+        }
+
+        .fact-box p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .fact-box strong {
+            color: #1a4a2a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-hero {
+                padding: 2rem 1rem;
+            }
+            
+            .internal-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .internal-nav ul li a {
+                display: inline-block;
+            }
+            
+            .content-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .content-wrapper {
+                padding: 1rem 1rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER - Matching homepage/sitemap header -->
+    <header>
+        <div class="header-inner">
+            <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+                <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+                <div>
+                    <div class="logo-text">ClimateAct</div>
+                    <div class="logo-sub">SDG 13 · Climate Action</div>
+                </div>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+            <nav aria-label="Main navigation">
+                <a href="home.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="ais.html">Action Sim</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="team.html">Team</a>
+                <a href="profile.html">Profile</a>
+                <a href="sitemap.html">Sitemap</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - Matching homepage style -->
+        <div class="content-hero">
+            <span class="hero-badge">📚 Student 2 · Content Page</span>
+            <h1>Understanding Climate Action</h1>
+            <p>Exploring SDG 13: causes, effects, and practical solutions for a sustainable future</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- Internal Navigation (Table of Contents) - Modern pill style -->
+            <nav class="internal-nav" aria-label="Page sections">
+                <h2>📑 On This Page</h2>
+                <ul>
+                    <li><a href="#what-is-sdg13">What is SDG 13?</a></li>
+                    <li><a href="#causes">Causes of Climate Change</a></li>
+                    <li><a href="#effects">Effects on Our World</a></li>
+                    <li><a href="#individual-action">What Individuals Can Do</a></li>
+                    <li><a href="#student-action">Students Taking Action</a></li>
+                    <li><a href="#solutions">Wider Solutions</a></li>
+                </ul>
+            </nav>
+
+            <!-- ======================== SECTION 1 ======================== -->
+            <section class="content-section" id="what-is-sdg13">
+                <h2>What is SDG 13?</h2>
+                <p>
+                    Sustainable Development Goal 13 (SDG 13) is part of the United Nations 2030 Agenda
+                    for Sustainable Development. Its focus is on taking urgent action to combat climate
+                    change and its impacts. Climate change is one of the greatest challenges facing
+                    humanity today, affecting every country and community on Earth.
+                </p>
+                <p>
+                    The goal calls for governments, businesses, communities, and individuals to take
+                    decisive steps to reduce greenhouse gas emissions, adapt to the effects of climate
+                    change, and build climate resilience — especially in the most vulnerable regions
+                    of the world such as small island nations and low-income countries.
+                </p>
+                
+                <div class="fact-box">
+                    <p><strong>📊 Did you know?</strong> The global average temperature has already risen by 1.1°C above pre-industrial levels. Every fraction of a degree matters!</p>
+                </div>
+
+                <!-- Image 1: SDG 13 logo -->
+                <img class="content-img"
+                     src="https://i.pinimg.com/736x/ed/c6/48/edc64809a6442b7f6e4df84a4443c6f1.jpg"
+                     alt="United Nations SDG 13 Climate Action logo with green background and a globe icon">
+                <p class="img-caption">Figure 1: United Nations Sustainable Development Goal 13 - Climate Action</p>
+            </section>
+
+            <!-- ======================== SECTION 2 ======================== -->
+            <section class="content-section" id="causes">
+                <h2>Causes of Climate Change</h2>
+                <p>
+                    Climate change is primarily driven by human activities that release large amounts
+                    of greenhouse gases (GHGs) such as carbon dioxide (CO₂) and methane (CH₄)
+                    into the atmosphere. These gases trap heat and cause the planet's average
+                    temperature to rise — a process known as global warming.
+                </p>
+
+                <h3>Main Causes</h3>
+                <ul>
+                    <li><strong>Burning of fossil fuels</strong> — Coal, oil, and natural gas used in power plants, cars, and factories are the largest source of CO₂ emissions globally.</li>
+                    <li><strong>Deforestation</strong> — Cutting down forests removes natural carbon sinks that absorb CO₂ from the atmosphere.</li>
+                    <li><strong>Agriculture and livestock</strong> — Farming produces methane from livestock digestion and nitrous oxide from fertilised soils.</li>
+                    <li><strong>Industrial processes</strong> — Cement production, chemical manufacturing, and waste disposal all contribute to greenhouse gas emissions.</li>
+                    <li><strong>Overconsumption</strong> — Fast fashion, food waste, and excessive energy use drive demand for more production and more emissions.</li>
+                </ul>
+
+                <div class="quote-box">
+                    <p>"The greenhouse effect is a natural phenomenon, but human activities have enhanced it to dangerous levels. We have the science and the solutions — what we need is action."</p>
+                    <cite>— Intergovernmental Panel on Climate Change (IPCC)</cite>
+                </div>
+
+                <!-- Image 2: Industrial pollution -->
+                <img class="content-img"
+                     src="https://i.pinimg.com/1200x/85/e8/12/85e81261eb7905bfd88e5324eed92ee6.jpg"
+                     alt="Industrial factory chimneys releasing thick smoke pollution into the sky">
+                <p class="img-caption">Figure 2: Industrial emissions are a major contributor to greenhouse gas concentrations</p>
+            </section>
+
+            <!-- ======================== SECTION 3 ======================== -->
+            <section class="content-section" id="effects">
+                <h2>Effects on Our World</h2>
+                <p>
+                    The consequences of unchecked climate change are wide-ranging and increasingly
+                    visible. Scientists observe accelerating ice melt, rising seas, more intense
+                    storms, and shifting weather patterns across every continent.
+                </p>
+
+                <h3>Key Impacts</h3>
+                <ul>
+                    <li><strong>Rising sea levels</strong> — As ice sheets melt and oceans warm and expand, coastal communities face flooding and loss of land.</li>
+                    <li><strong>Extreme weather events</strong> — Heatwaves, hurricanes, droughts, and floods are becoming more frequent and severe.</li>
+                    <li><strong>Biodiversity loss</strong> — Changing temperatures threaten ecosystems, leading to habitat destruction and species extinction.</li>
+                    <li><strong>Food and water insecurity</strong> — Droughts and erratic rainfall threaten crop yields and freshwater supplies, particularly in Africa and South Asia.</li>
+                    <li><strong>Health impacts</strong> — Air pollution, heat stress, and the spread of vector-borne diseases like malaria are worsened by a warming climate.</li>
+                </ul>
+
+                <!-- Image 3: Flooding -->
+                <img class="content-img"
+                     src="https://i.pinimg.com/1200x/31/b8/9d/31b89d8331cf3c891d1c9479239b073e.jpg"
+                     alt="Flooded street with cars submerged in water showing the effects of extreme weather">
+                <p class="img-caption">Figure 3: Extreme weather events like flooding are becoming more frequent and severe</p>
+            </section>
+
+            <!-- ======================== SECTION 4 ======================== -->
+            <section class="content-section" id="individual-action">
+                <h2>What Individuals Can Do</h2>
+                <p>
+                    While large-scale policy change is essential, individual actions also play an
+                    important role in reducing emissions and building a climate-conscious culture.
+                    Small daily changes, multiplied across millions of people, can create significant impact.
+                </p>
+
+                <h3>Practical Steps You Can Take Today</h3>
+                <ul>
+                    <li>Walk, cycle, or use public transport instead of driving alone.</li>
+                    <li>Switch to a renewable energy supplier or reduce home energy use.</li>
+                    <li>Reduce meat and dairy consumption — plant-based diets have a lower carbon footprint.</li>
+                    <li>Buy second-hand or choose durable, sustainably produced goods.</li>
+                    <li>Reduce, reuse, and recycle — avoid single-use plastics.</li>
+                    <li>Talk to friends, family, and colleagues about climate action.</li>
+                    <li>Vote for and support politicians and businesses that commit to net-zero targets.</li>
+                </ul>
+
+                <!-- Image 4: Cycling -->
+                <img class="content-img"
+                     src="https://i.pinimg.com/736x/c4/ab/51/c4ab51852936922231e887b6f162a145.jpg"
+                     alt="Person cycling in a city representing individual sustainable transport choices">
+                <p class="img-caption">Figure 4: Sustainable transport choices like cycling reduce personal carbon emissions</p>
+            </section>
+
+            <!-- ======================== SECTION 5 ======================== -->
+            <section class="content-section" id="student-action">
+                <h2>Students Taking Action</h2>
+                <p>
+                    As university students, we have a unique position in society. We are educated,
+                    connected, and energetic — and we will inherit the consequences of today's
+                    decisions. That means we also have significant power to drive change.
+                </p>
+
+                <h3>How Students Can Lead</h3>
+                <ul>
+                    <li><strong>Join or start a sustainability society</strong> on campus to advocate for greener university practices.</li>
+                    <li><strong>Participate in climate strikes and campaigns</strong> to make our voices heard by decision-makers.</li>
+                    <li><strong>Choose sustainable careers</strong> — consider how your future profession can contribute to environmental solutions.</li>
+                    <li><strong>Reduce campus energy use</strong> — turn off equipment when not in use, use double-sided printing, and avoid unnecessary travel.</li>
+                    <li><strong>Engage with student union</strong> to push for divestment from fossil fuels and investment in renewable energy projects.</li>
+                </ul>
+
+                <div class="fact-box">
+                    <p><strong>🌍 Student Power:</strong> The Fridays for Future movement, started by Greta Thunberg, mobilized over 7 million people globally in 2019 — showing the power of student-led climate action!</p>
+                </div>
+
+                <!-- Image 5: Students campaigning -->
+                <img class="content-img"
+                     src="https://i.pinimg.com/1200x/98/6e/59/986e59db7003eb4ed86dab4d6a85c0dc.jpg"
+                     alt="University students holding climate action protest signs on campus">
+                <p class="img-caption">Figure 5: Student-led climate protests have influenced policy and raised awareness worldwide</p>
+            </section>
+
+            <!-- ======================== SECTION 6 ======================== -->
+            <section class="content-section" id="solutions">
+                <h2>Wider Solutions</h2>
+                <p>
+                    Addressing climate change at the scale required demands systemic solutions:
+                    policy reform, technological innovation, financial investment, and international
+                    cooperation. Some of the most promising approaches include:
+                </p>
+                <ul>
+                    <li><strong>Renewable energy transition</strong> — Replacing coal and gas with solar, wind, and hydroelectric power at scale.</li>
+                    <li><strong>Carbon pricing</strong> — Making it costly to pollute encourages businesses to innovate and adopt cleaner practices.</li>
+                    <li><strong>Reforestation and ecosystem restoration</strong> — Protecting and expanding forests, wetlands, and ocean ecosystems as carbon sinks.</li>
+                    <li><strong>Green urban planning</strong> — Designing cities with public transport, green spaces, and energy-efficient buildings.</li>
+                    <li><strong>International climate agreements</strong> — Strengthening commitments under the Paris Agreement and holding nations accountable to their pledges.</li>
+                </ul>
+                <p>
+                    Each of us has a role to play — whether as a voter, a consumer, a student, or a
+                    future professional. The climate crisis is urgent, but with coordinated action,
+                    a sustainable future is within reach.
+                </p>
+
+                <div class="quote-box">
+                    <p>"The world is at a crossroads. The decisions we make today will determine the fate of generations to come. Let us choose wisely and act boldly."</p>
+                    <cite>— António Guterres, UN Secretary-General</cite>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Go to Top Button - CSS fixed positioning, no JS -->
+    <a href="#top" id="topBtn" aria-label="Return to top of page" title="Back to top">↑</a>
+
+    <!-- FOOTER - Matching homepage/sitemap footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-text">ClimateAct</div>
+                <p>A student project promoting SDG 13 — Climate Action. We believe that informed individuals, empowered communities, and bold ideas can change the trajectory of our planet.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Pages</h4>
+                <a href="home.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="ais.html">Action Simulator</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="team.html">Team</a>
+                <a href="profile.html">User Profile</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
+            <div class="footer-links">
+                <h4>Student 2</h4>
+                <a href="pageEditor_ST2.html">Page Editor</a>
+                <a href="validation_ST2.html">Validation</a>
+                <a href="content_ST2.html">My Content Page</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ClimateAct · University of Westminster · Tirth Raj Bhatta · Student ID: w2121964</span>
+            <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+        </div>
+    </footer>
+
+</body>
+</html>

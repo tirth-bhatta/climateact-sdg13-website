@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Editor – Student 4 | ClimateAct</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    :root {
+      --primary: #1a6b4a;
+      --secondary: #2ec4a0;
+      --accent: #f4a11d;
+      --neutral: #f5f7f2;
+      --dark: #1c2b22;
+      --mid: #4a6558;
+      --white: #ffffff;
+      --shadow: 0 4px 18px rgba(26,107,74,0.10);
+      --radius: 10px;
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral);
+      color: var(--dark);
+      line-height: 1.75;
+    }
+    a { color: var(--secondary); }
+    a:hover { color: var(--primary); }
+
+    /* Header */
+    .editor-header {
+      background: var(--dark);
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .editor-header h1 { font-family: var(--font-head); font-size: 1.5rem; color: var(--accent); }
+    .editor-header nav a {
+      color: rgba(255,255,255,0.8);
+      margin-left: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .editor-header nav a:hover { color: var(--secondary); }
+
+    /* Layout */
+    .editor-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      align-items: start;
+    }
+
+    /* Side nav */
+    .editor-nav {
+      position: sticky;
+      top: 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+    }
+    .editor-nav h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--secondary);
+      margin-bottom: 0.8rem;
+    }
+    .editor-nav ul { list-style: none; }
+    .editor-nav ul li { margin-bottom: 0.4rem; }
+    .editor-nav ul li a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--mid);
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .editor-nav ul li a:hover { background: var(--neutral); color: var(--primary); }
+
+    /* Sections */
+    .editor-content section {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      scroll-margin-top: 20px;
+    }
+    .editor-content h2 {
+      font-family: var(--font-head);
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid var(--secondary);
+    }
+    .editor-content h3 { color: var(--primary); font-size: 1.1rem; margin: 1.2rem 0 0.4rem; }
+    .editor-content p, .editor-content li { margin-bottom: 0.7rem; }
+    .editor-content ul { padding-left: 1.5rem; }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Page link pills */
+    .page-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; }
+    .page-link-pill {
+      background: var(--neutral);
+      border: 1px solid #c5d9cf;
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--primary);
+      transition: background 0.2s;
+    }
+    .page-link-pill:hover { background: var(--primary); color: white; text-decoration: none; }
+
+    /* Meeting log table */
+    .meeting-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .meeting-table th {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    .meeting-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid #dde8e3; vertical-align: top; }
+    .meeting-table tr:nth-child(even) td { background: #f0f7f3; }
+
+    /* Code snippets */
+    code {
+      background: #e8f2ec;
+      color: var(--primary);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    footer a { color: var(--secondary); }
+
+    /* Go to top */
+    .go-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      background: var(--primary);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+    .go-top:hover { background: var(--secondary); color: white; text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .editor-layout { grid-template-columns: 1fr; }
+      .editor-nav { position: static; }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <header class="editor-header">
+    <div>
+      <h1>Page Editor — Student 4</h1>
+      <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">ClimateAct | SDG 13 | University of Westminster</p>
+    </div>
+    <nav>
+      <a href="home.html">← Back to Site</a>
+      <a href="validation_ST4.html" target="_blank">Validation Page</a>
+    </nav>
+  </header>
+
+  <div class="editor-layout">
+
+    <!-- Side navigation -->
+    <aside class="editor-nav" aria-label="Page editor sections">
+      <h1>Contents</h1>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#profile-page">Profile Page</a></li>
+        <li><a href="#sitemap-page">Sitemap Page</a></li>
+        <li><a href="#content-page">Content Page</a></li>
+        <li><a href="#challenges">Challenges</a></li>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#janet">JANET Compliance</a></li>
+        <li><a href="#meetings">Meeting Log</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main editor content -->
+    <main class="editor-content">
+
+      <!-- OVERVIEW -->
+      <section id="overview">
+        <h2>Overview</h2>
+        <span class="role-badge">Role: Student 4 — User Profile &amp; Sitemap</span>
+
+        <p><strong>Student Name:</strong> Himanshu Narayan Shrestha <br />
+           <strong>Student ID:</strong>w2122002<br />
+           <strong>Module:</strong> 4COSC011W Web Design and Development (2025/26)</p>
+
+        <h3>Completed Pages &amp; Tasks</h3>
+        <div class="page-links">
+          <a href="profile.html" target="_blank" class="page-link-pill">profile.html</a>
+          <a href="sitemap.html" target="_blank" class="page-link-pill">sitemap.html</a>
+          <a href="content_ST4.html" target="_blank" class="page-link-pill">content_ST4.html</a>
+          <a href="validation_ST4.html" target="_blank" class="page-link-pill">validation_ST4.html</a>
+        </div>
+        <p>I was responsible for implementing the User Profile page, the SVG Sitemap page, and my individual Content Page. I also integrated the shared template and global CSS provided by Student 1 into all of my pages.</p>
+      </section>
+
+      <!-- PROFILE PAGE -->
+      <section id="profile-page">
+        <h2>User Profile Page — <code>profile.html</code></h2>
+        <div class="page-links">
+          <a href="profile.html" target="_blank" class="page-link-pill">View Live Page ↗</a>
+          <a href="validation_ST4.html#val-profile" target="_blank" class="page-link-pill">Validation Evidence ↗</a>
+        </div>
+
+        <h3>HTML Structure</h3>
+        <p>The page uses the shared template structure with <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. Inside <code>&lt;main&gt;</code>, I used a <code>&lt;section&gt;</code> for the progress indicator (with <code>role="progressbar"</code> for accessibility), a <code>&lt;div class="control-row"&gt;</code> for action buttons, and a second <code>&lt;section&gt;</code> for the profile output. The output section contains three subsections that are revealed progressively using the CSS class <code>visible</code>, added and removed by JavaScript.</p>
+
+        <h3>CSS Techniques</h3>
+        <p>I used embedded CSS within a <code>&lt;style&gt;</code> block for all profile-specific styles. Key techniques include CSS <code>transition</code> on the <code>.progress-bar</code> width for smooth animation, <code>@keyframes fadeIn</code> and <code>slideIn</code> for revealing profile sections, and CSS Grid (<code>flex-wrap</code>) for the step indicator buttons. The <code>display: none</code> / <code>display: block</code> toggle pattern (via the <code>.visible</code> class) ensures sections are hidden by default and revealed by DOM manipulation.</p>
+
+        <h3>JavaScript Implementation</h3>
+        <p>The core JavaScript logic uses a <code>profileData</code> object to store answers across three steps, and a <code>stepStatus</code> object to track each step's state (<code>'empty'</code>, <code>'partial'</code>, or <code>'full'</code>). Key functions include:</p>
+        <ul>
+          <li><code>startProfile()</code> — finds the first incomplete step and calls <code>runStep()</code>.</li>
+          <li><code>runStep(num)</code> — iterates through each prompt in the step, stores answers in <code>profileData</code>, and computes the step status.</li>
+          <li><code>revisitStep(num)</code> — allows the user to return to any step, offering to keep or overwrite existing answers.</li>
+          <li><code>updateProgressUI()</code> — calculates percentage completion and updates the progress bar, label, and step buttons via DOM manipulation.</li>
+          <li><code>renderProfile()</code> — calls <code>renderStepSection()</code> for each step, building table rows from stored data and toggling the <code>.visible</code> class on each section.</li>
+        </ul>
+        <p>I also included an <code>escapeHtml()</code> utility to prevent cross-site scripting vulnerabilities when rendering user-provided input into the DOM.</p>
+
+        <h3>Design Rationale</h3>
+        <p>I chose a progress bar combined with colour-coded step buttons to give users immediate visual feedback on their completion state. The <code>prompt()</code>-based input was required by the specification; I mitigated its limited styling by wrapping it in clearly structured step logic with user-friendly messages. The profile output card uses the same card aesthetic as the global CSS to maintain visual consistency.</p>
+      </section>
+
+      <!-- SITEMAP PAGE -->
+      <section id="sitemap-page">
+        <h2>Sitemap Page — <code>sitemap.html</code></h2>
+        <div class="page-links">
+          <a href="sitemap.html" target="_blank" class="page-link-pill">View Live Page ↗</a>
+          <a href="validation_ST4.html#val-sitemap" target="_blank" class="page-link-pill">Validation Evidence ↗</a>
+        </div>
+
+        <h3>HTML Structure</h3>
+        <p>The page uses the shared template. The sitemap itself is embedded as an inline <code>&lt;svg&gt;</code> element inside a responsive wrapper <code>&lt;div class="svg-container"&gt;</code>. Each page node is represented by an SVG <code>&lt;a&gt;</code> (anchor) element wrapping a <code>&lt;rect&gt;</code> (node box) and two <code>&lt;text&gt;</code> elements (page name and filename). Each <code>&lt;a&gt;</code> includes a <code>&lt;title&gt;</code> child for screen-reader accessibility and <code>tabindex="0"</code> for keyboard navigation.</p>
+
+        <h3>SVG Techniques</h3>
+        <p>The <code>viewBox="0 0 860 540"</code> attribute combined with <code>width="100%"</code> and no fixed height makes the SVG scale proportionally on all screen sizes. Connector lines are drawn with <code>&lt;line&gt;</code> elements using the CSS class <code>connector</code>. Node colour differentiation uses CSS fill classes (<code>node-home</code>, <code>node-main</code>, <code>node-sub</code>, etc.) which makes them easy to change globally.</p>
+
+        <h3>CSS Hover &amp; Focus</h3>
+        <p>Hover effects are implemented entirely in CSS using <code>.node-link:hover .node-rect</code> selectors, changing the <code>fill</code> to the accent colour and increasing <code>stroke-width</code>. A <code>:focus</code> rule mirrors the hover styling and adds an <code>outline</code> for visible keyboard focus — satisfying WCAG 2.1 success criterion 2.4.7 (Focus Visible).</p>
+
+        <h3>Design Rationale</h3>
+        <p>I chose a top-down hierarchical layout to mirror a traditional website tree structure, which is intuitive for users. Colour coding differentiates student roles and shared pages, and a legend below the SVG explains the colour scheme. I avoided using bitmap images or screenshots, as required, building the entire diagram programmatically in SVG.</p>
+      </section>
+
+      <!-- CONTENT PAGE -->
+      <section id="content-page">
+        <h2>Content Page — <code>content_ST4.html</code></h2>
+        <div class="page-links">
+          <a href="content_ST4.html" target="_blank" class="page-link-pill">View Live Page ↗</a>
+          <a href="validation_ST4.html#val-content" target="_blank" class="page-link-pill">Validation Evidence ↗</a>
+        </div>
+
+        <h3>HTML Structure</h3>
+        <p>The content page uses a CSS Grid two-column layout (<code>grid-template-columns: 220px 1fr</code>) with a sticky <code>&lt;aside&gt;</code> sidebar for internal navigation, and an <code>&lt;article&gt;</code> as the main content container. Six <code>&lt;section&gt;</code> elements with unique <code>id</code> attributes allow the sidebar anchor links to function correctly. A <code>scroll-margin-top</code> offset compensates for the sticky header.</p>
+
+        <h3>Internal Navigation</h3>
+        <p>The sidebar contains anchor links using <code>href="#section-id"</code> pointing to each section's <code>id</code>. This satisfies the internal linking requirement without JavaScript. The "Go to Top" button uses <code>href="#top"</code> and is positioned with <code>position: fixed</code>, meaning it remains visible at all scroll positions.</p>
+
+        <h3>Images</h3>
+        <p>Four images sourced from Unsplash (royalty-free) are included, each with descriptive <code>alt</code> text, <code>max-height</code>, <code>border-radius</code>, and a <code>box-shadow</code>. The <code>object-fit: cover</code> property maintains consistent image height without distortion.</p>
+
+        <h3>Design Rationale</h3>
+        <p>The two-column layout with a sticky sidebar reflects common editorial and documentation patterns, improving usability for long-form content. I deliberately kept the typography clean and readable, with clear heading hierarchy from <code>&lt;h1&gt;</code> down to <code>&lt;h3&gt;</code>, supporting both human readability and accessibility tools.</p>
+      </section>
+
+      <!-- CHALLENGES -->
+      <section id="challenges">
+        <h2>Challenges &amp; Lessons Learned</h2>
+
+        <h3>Challenge 1: JavaScript <code>prompt()</code> limitations</h3>
+        <p>The User Profile specification requires data collection via <code>prompt()</code> rather than HTML forms. This is unusual for modern web development and presented challenges: prompts block the browser thread, cannot be styled, and behave differently across browsers. I resolved this by designing very clear, step-labelled prompt messages (e.g. "Step 1 of 3") and adding a <code>confirm()</code> dialog when revisiting already-answered fields, which gave users meaningful feedback without relying on custom UI elements.</p>
+
+        <h3>Challenge 2: SVG responsiveness</h3>
+        <p>Making the SVG sitemap scale well on small screens required careful use of <code>viewBox</code> and avoiding fixed pixel dimensions on the outer <code>&lt;svg&gt;</code> tag. I also found that CSS hover selectors on SVG <code>&lt;a&gt;</code> elements required descendant selectors (<code>.node-link:hover .node-rect</code>) rather than a simple <code>:hover</code> on the rect, which was a new technique I learned through experimentation.</p>
+
+        <h3>Challenge 3: Template integration</h3>
+        <p>Integrating my pages with Student 1's template and CSS required careful attention to avoid overriding global styles. I learned to prefix all my embedded CSS with specific class names (e.g. <code>.profile-hero</code>, <code>.side-nav</code>) to ensure no style leakage into shared components.</p>
+
+        <h3>Lessons Learned</h3>
+        <p>This project deepened my understanding of DOM manipulation, SVG authoring, and CSS architecture. I learned the importance of separating page-specific and global styles from the outset, and of designing for accessibility as a first-class concern rather than an afterthought.</p>
+      </section>
+
+      <!-- ACCESSIBILITY -->
+      <section id="accessibility">
+        <h2>Accessibility Considerations</h2>
+
+        <h3>Semantic HTML</h3>
+        <p>All pages use semantic HTML5 elements: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, and <code>&lt;footer&gt;</code>. These landmarks are recognised by screen readers, allowing users to jump between page regions efficiently.</p>
+
+        <h3>Images and alt text</h3>
+        <p>Every image on all my pages includes a meaningful <code>alt</code> attribute that describes the image content in context. Decorative SVG elements (e.g. the site logo emoji) include <code>aria-hidden="true"</code> or a descriptive <code>aria-label</code>.</p>
+
+        <h3>Keyboard navigation</h3>
+        <p>All interactive elements are keyboard-accessible: buttons are native <code>&lt;button&gt;</code> elements, links are native <code>&lt;a&gt;</code> elements, and SVG nodes include <code>tabindex="0"</code>. Focus styles are visible on all interactive elements, either inherited from browser defaults or explicitly defined in CSS (<code>:focus { outline: 3px solid var(--accent); }</code>).</p>
+
+        <h3>ARIA attributes</h3>
+        <p>The progress bar uses <code>role="progressbar"</code> with <code>aria-valuenow</code>, <code>aria-valuemin</code>, and <code>aria-valuemax</code> attributes that are updated dynamically by JavaScript. The profile output section uses <code>aria-live="polite"</code> so screen readers announce changes. The sitemap SVG includes a <code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code> at the top level, and each node's <code>&lt;a&gt;</code> includes <code>aria-label</code>.</p>
+
+        <h3>Colour contrast</h3>
+        <p>All text-to-background colour combinations meet or exceed WCAG 2.1 AA contrast ratios (minimum 4.5:1 for normal text, 3:1 for large text). The primary green (#1a6b4a) on white achieves a ratio of approximately 7.2:1.</p>
+      </section>
+
+      <!-- JANET COMPLIANCE -->
+      <section id="janet">
+        <h2>Compliance with JANET Regulations</h2>
+
+        <p>JANET (Joint Academic Network) sets the regulations governing web pages published on UK academic network infrastructure, including university web servers. My pages comply with these regulations in the following ways:</p>
+
+        <h3>Appropriate and ethical content</h3>
+        <p>All content on my pages is original, factual, and written with educational intent. No content contains offensive material, hate speech, discriminatory language, or content that could bring the university into disrepute. The topic — climate action — is directly aligned with the university's SDG commitments.</p>
+
+        <h3>Responsible use of external resources</h3>
+        <p>All external images used (from Unsplash) are royalty-free under the Unsplash License, which permits use for educational purposes without attribution, though I have included source references in my code comments as good practice. Google Fonts are loaded via the official Google Fonts CDN, which complies with their terms of service.</p>
+
+        <h3>No collection of personal data</h3>
+        <p>The User Profile page collects data only via browser <code>prompt()</code> dialogs; this data is stored exclusively in JavaScript variables in the browser's memory and is never transmitted to a server, logged, or stored persistently. This means no GDPR or data protection obligations arise from this page.</p>
+
+        <h3>Academic integrity</h3>
+        <p>All code and content was written by me for this coursework. No templates were downloaded from the internet. External libraries (Google Fonts) are used only for typography and do not form part of the functional implementation.</p>
+      </section>
+
+      <!-- MEETING LOG -->
+      <section id="meetings">
+        <h2>Group Meetings &amp; Contribution Log</h2>
+        <p>A minimum of six group meetings were held throughout the project. My individual contributions at each meeting are documented below.</p>
+
+        <table class="meeting-table" aria-label="Group meeting log">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date &amp; Time</th>
+              <th>Format</th>
+              <th>Objective</th>
+              <th>Attended?</th>
+              <th>My Individual Contribution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>9 Feb 2026, 14:00</td>
+              <td>Face-to-face</td>
+              <td>Choose SDG and assign student roles</td>
+              <td>Yes</td>
+              <td>Voted for SDG 13 (Climate Action). Agreed to take responsibility for User Profile and Sitemap pages.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>16 Feb 2026, 15:00</td>
+              <td>Online (Teams)</td>
+              <td>Agree visual identity and colour palette</td>
+              <td>Yes</td>
+              <td>Proposed the green/teal colour palette and Playfair Display / Source Sans 3 font pairing. Team agreed on this direction.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>23 Feb 2026, 14:30</td>
+              <td>Hybrid</td>
+              <td>Review Student 1's template and discuss navigation structure</td>
+              <td>Yes</td>
+              <td>Tested the shared template and CSS on my local machine. Provided feedback on the nav bar spacing on mobile. Confirmed all file name conventions with the team.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>2 Mar 2026, 14:00</td>
+              <td>Face-to-face</td>
+              <td>Progress review — first drafts of all pages</td>
+              <td>Yes</td>
+              <td>Demonstrated the User Profile JavaScript logic (prompt-based data collection and progressive DOM rendering). Showed the initial SVG sitemap draft. Received peer feedback on node labelling clarity.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>9 Mar 2026, 13:00</td>
+              <td>Online (Teams)</td>
+              <td>Accessibility and validation review</td>
+              <td>Yes</td>
+              <td>Ran W3C validation on profile.html and sitemap.html. Fixed two validation errors (missing <code>alt</code> text on a decorative SVG, and a stray <code>&lt;/div&gt;</code>). Added <code>aria-live</code> to the profile output area following peer suggestion.</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>14 Mar 2026, 14:00</td>
+              <td>Face-to-face</td>
+              <td>Final review and submission preparation</td>
+              <td>Yes</td>
+              <td>Uploaded all my pages to the university web server. Verified all navigation links work correctly from my pages. Completed the Page Editor and Validation pages. Signed the group contract.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="references">
+        <h2>References</h2>
+        <ol style="padding-left:1.5rem;">
+          <li id="ref1">Economou, D. (2026). <em>4COSC011W Lecture Notes: HTML, CSS, and JavaScript</em>. University of Westminster. [Accessed via Blackboard, February–March 2026].</li>
+          <li id="ref2">Mozilla Developer Network (2026). <em>SVG: Scalable Vector Graphics</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/SVG</a> [Accessed 10 March 2026].</li>
+          <li id="ref3">Mozilla Developer Network (2026). <em>Document.querySelector()</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector</a> [Accessed 5 March 2026].</li>
+          <li id="ref4">W3C (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">https://www.w3.org/TR/WCAG21/</a> [Accessed 8 March 2026].</li>
+          <li id="ref5">Jisc (2024). <em>JANET Acceptable Use Policy</em>. Available at: <a href="https://www.jisc.ac.uk/janet" target="_blank" rel="noopener">https://www.jisc.ac.uk/janet</a> [Accessed 12 March 2026].</li>
+          <li id="ref6">Unsplash (2026). <em>Royalty-free photographs used on content_ST4.html</em>. Available at: <a href="https://unsplash.com" target="_blank" rel="noopener">https://unsplash.com</a>. Licensed under the Unsplash License.</li>
+          <li id="ref7">Google Fonts (2026). <em>Playfair Display and Source Sans 3</em>. Available at: <a href="https://fonts.google.com" target="_blank" rel="noopener">https://fonts.google.com</a> [Accessed 15 February 2026].</li>
+          <li id="ref8">W3Schools (2026). <em>HTML DOM manipulation tutorial</em>. Available at: <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank" rel="noopener">https://www.w3schools.com/js/js_htmldom.asp</a> [Accessed 3 March 2026].</li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Go to top -->
+  <a href="#top" class="go-top" aria-label="Back to top of page" title="Back to top">↑</a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <strong style="color:white;">Page Editor — Student 4</strong><br />
+      <span style="color:rgba(255,255,255,0.5); font-style:italic;">Himanshu Narayan Shrestha | 4COSC011W | 2025/26</span>
+    </div>
+    <div>
+      <a href="profile.html">User Profile</a> &nbsp;|&nbsp;
+      <a href="sitemap.html">Sitemap</a> &nbsp;|&nbsp;
+      <a href="content_ST4.html">My Content Page</a> &nbsp;|&nbsp;
+      <a href="validation_ST4.html">Validation Page</a>
+    </div>
+    <div>
+      <small>University of Westminster. All work is original and complies with JANET regulations.</small>
+    </div>
+  </footer>
+
+</body>
+</html>

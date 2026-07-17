@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateAct - Action Impact Simulator | SDG 13 Climate Action</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+    <!-- Global CSS shared across all team pages -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+    <!-- Page-specific CSS for AIS - Matching homepage/sitemap theme -->
+    <style>
+        /* Hero Section - Matching homepage style */
+        .ais-hero {
+            background: linear-gradient(135deg, #1a3a2a 0%, #0f2a1a 100%);
+            color: var(--white);
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ais-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(240, 165, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(26, 58, 42, 0.3) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .ais-hero h1 {
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .ais-hero p {
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Badge - Matching homepage */
+        .hero-badge {
+            display: inline-block;
+            background: #f0a500;
+            color: #1a3a2a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        /* AIS Content Wrapper */
+        .ais-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Action Cards Responsive Grid - Matching card grid from homepage */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        /* Individual Action Card - Matching homepage card style */
+        .action-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: center;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle glow effect on hover */
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 158, 91, 0.05) 0%, rgba(240, 165, 0, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Card Hover Effect */
+        .action-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: rgba(240, 165, 0, 0.3);
+        }
+
+        .action-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Selected Card Highlight */
+        .action-card.selected {
+            border-color: #f0a500;
+            background: linear-gradient(135deg, #fff8f0 0%, #ffffff 100%);
+            box-shadow: 0 8px 20px rgba(240, 165, 0, 0.2);
+            position: relative;
+        }
+
+        .action-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #f0a500;
+            color: #1a3a2a;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Card Thumbnail Image Styling */
+        .action-card img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid #e8e0d5;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .action-card:hover img {
+            transform: scale(1.05);
+            border-color: #f0a500;
+        }
+
+        .action-card.selected img {
+            border-color: #f0a500;
+        }
+
+        /* Card Title Heading */
+        .action-card h3 {
+            font-size: 1.1rem;
+            color: #1a4a2a;
+            margin: 0.5rem 0 0.5rem;
+            font-family: var(--font-display);
+        }
+
+        /* Card Description Text */
+        .action-card p {
+            font-size: 0.85rem;
+            color: #6a7a6a;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Impact Points Badge */
+        .impact-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a4a2a 0%, #2a6a3a 100%);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .action-card.selected .impact-label {
+            background: #f0a500;
+            color: #1a3a2a;
+        }
+
+        /* Feedback Result Area - Matching card style */
+        #feedback-area {
+            margin-top: 2rem;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            background: var(--white);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        /* Impact Level Heading */
+        #impact-level {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+            color: #1a4a2a;
+        }
+
+        /* Score Text */
+        #score-text {
+            font-size: 1.1rem;
+            color: #4a5a4a;
+            margin-bottom: 0.75rem;
+        }
+
+        #score-text strong {
+            color: #f0a500;
+            font-size: 1.3rem;
+        }
+
+        /* Impact Message */
+        #impact-message {
+            font-size: 0.95rem;
+            color: #6a7a6a;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        /* Reset Button - Matching homepage button style */
+        #reset-btn {
+            background: #e8e0d5;
+            color: #1a4a2a;
+            border: none;
+            padding: 0.65rem 1.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        #reset-btn:hover {
+            background: #f0a500;
+            color: #1a3a2a;
+            transform: translateY(-2px);
+        }
+
+        /* Section Heading - Matching homepage */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-heading h2 {
+            color: #1a4a2a;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #f0a500;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Info Box for Impact Levels */
+        .info-box {
+            background: #f8f5ef;
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border-left: 4px solid #f0a500;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #6a7a6a;
+        }
+
+        .info-box strong {
+            color: #1a4a2a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ais-hero {
+                padding: 2rem 1rem;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #impact-level {
+                font-size: 1.4rem;
+            }
+            
+            .ais-wrapper {
+                padding: 1rem 1rem 3rem;
+            }
+        }
+
+        /* Background overlay for body when impact level changes */
+        body {
+            transition: background-image 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER - Matching homepage/sitemap header -->
+    <header>
+        <div class="header-inner">
+            <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+                <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+                <div>
+                    <div class="logo-text">ClimateAct</div>
+                    <div class="logo-sub">SDG 13 · Climate Action</div>
+                </div>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+            <nav aria-label="Main navigation">
+                <a href="home.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="ais.html" class="active">Action Sim</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="team.html">Team</a>
+                <a href="profile.html">Profile</a>
+                <a href="sitemap.html">Sitemap</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - Matching homepage style -->
+        <div class="ais-hero">
+            <span class="hero-badge">⚡ SDG 13 · Climate Action</span>
+            <h1>Action Impact Simulator</h1>
+            <p>Select the actions you are willing to take for Climate Action. Each action earns impact points. See how your choices add up!</p>
+        </div>
+
+        <div class="ais-wrapper">
+            <!-- Info Box for Impact Levels -->
+            <div class="info-box">
+                <p><strong>🌱 Impact Levels:</strong> Low Impact (1-7 pts) | ⚡ Medium Impact (8-14 pts) | 🌍 High Impact (15+ pts)</p>
+            </div>
+
+            <!-- 6 Action Cards -->
+            <div class="action-grid" id="action-grid">
+
+                <!-- Card 1: Use Public Transport -->
+                <div class="action-card" onclick="toggleCard(this, 4)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/1200x/cf/b0/55/cfb055d72157d6eb6b47006199e8e332.jpg" alt="Person using public transport - bus and train icons" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=🚌'">
+                    <h3>Use Public Transport</h3>
+                    <p>Swap one car journey per week for public transport such as buses or trains to reduce your personal carbon emissions.</p>
+                    <span class="impact-label">Impact: 4 pts</span>
+                </div>
+
+                <!-- Card 2: Conserve Energy -->
+                <div class="action-card" onclick="toggleCard(this, 3)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/736x/d3/0f/8b/d30f8b1a804e138a34be1075e0405116.jpg" alt="Light bulb representing energy conservation" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=💡'">
+                    <h3>Conserve Energy</h3>
+                    <p>Turn off lights and unplug devices when not in use. Switch to LED bulbs to lower your household energy consumption.</p>
+                    <span class="impact-label">Impact: 3 pts</span>
+                </div>
+
+                <!-- Card 3: Plant Trees -->
+                <div class="action-card" onclick="toggleCard(this, 5)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/736x/95/40/71/954071311f3285646bacf599522b86fc.jpg" alt="Hands planting a small tree sapling in soil" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=🌳'">
+                    <h3>Plant Trees</h3>
+                    <p>Participate in local tree-planting events or plant a native tree in your garden. Trees absorb CO₂ and provide biodiversity benefits.</p>
+                    <span class="impact-label">Impact: 5 pts</span>
+                </div>
+
+                <!-- Card 4: Reduce & Recycle -->
+                <div class="action-card" onclick="toggleCard(this, 3)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/736x/8b/a5/81/8ba581d4591c4f73bfd4a0011fac5990.jpg" alt="Recycling bin with different recyclable materials" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=♻️'">
+                    <h3>Reduce &amp; Recycle</h3>
+                    <p>Cut down on single-use plastic and recycle household waste properly. Choose products with minimal packaging wherever possible.</p>
+                    <span class="impact-label">Impact: 3 pts</span>
+                </div>
+
+                <!-- Card 5: Eat More Plant-Based -->
+                <div class="action-card" onclick="toggleCard(this, 5)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/736x/ea/33/cf/ea33cf19cd36d8f1fe148cda0ca55523.jpg" alt="Plate of plant-based food including vegetables and legumes" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=🥗'">
+                    <h3>Eat More Plant-Based</h3>
+                    <p>Reducing meat consumption, especially red meat, significantly lowers your carbon footprint. Try at least two plant-based meals per week.</p>
+                    <span class="impact-label">Impact: 5 pts</span>
+                </div>
+
+                <!-- Card 6: Spread Awareness -->
+                <div class="action-card" onclick="toggleCard(this, 2)" tabindex="0" aria-pressed="false" role="button">
+                    <img src="https://i.pinimg.com/1200x/94/e6/94/94e6944c37cefc09c6bc8dc2762b74dc.jpg" alt="Megaphone representing sharing climate awareness" onerror="this.src='https://placehold.co/90x90/1a4a2a/fff?text=📢'">
+                    <h3>Spread Awareness</h3>
+                    <p>Share reliable climate information on social media, talk to friends, or join a student campaign to inspire others to take action.</p>
+                    <span class="impact-label">Impact: 2 pts</span>
+                </div>
+
+            </div>
+
+            <!-- Feedback Area: Updated by JS -->
+            <div id="feedback-area">
+                <div id="impact-level">Your Impact Level: —</div>
+                <p id="score-text">Selected actions: 0 &nbsp;|&nbsp; Total impact score: <strong>0</strong></p>
+                <p id="impact-message">Select some actions above to see your impact!</p>
+                <button id="reset-btn" onclick="resetAll()">Reset Selections</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER - Matching homepage/sitemap footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-text">ClimateAct</div>
+                <p>A student project promoting SDG 13 — Climate Action. We believe that informed individuals, empowered communities, and bold ideas can change the trajectory of our planet.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Pages</h4>
+                <a href="home.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="ais.html">Action Simulator</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="team.html">Team</a>
+                <a href="profile.html">User Profile</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
+            <div class="footer-links">
+                <h4>Tirth Raj Bhatta</h4>
+                <a href="pageEditor_ST2.html">Page Editor</a>
+                <a href="validation_ST2.html">Validation</a>
+                <a href="content_ST2.html">My Content Page</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ClimateAct · University of Westminster · Tirth Raj Bhatta · Student ID: w2121964</span>
+            <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript: Card selection, score calculation, feedback display -->
+    <script>
+        let totalScore = 0;
+        let selectedCount = 0;
+
+        // Background images per impact level
+        const backgrounds = {
+            none:   "",
+            low:    "images/bg-low.jpg",
+            medium: "images/bg-medium.jpg",
+            high:   "images/bg-high.jpg"
+        };
+
+        // Toggle card selection, update score and refresh feedback
+        function toggleCard(card, points) {
+            var isSelected = card.classList.contains("selected");
+
+            if (isSelected) {
+                // Deselect: remove class, subtract points
+                card.classList.remove("selected");
+                card.setAttribute("aria-pressed", "false");
+                totalScore -= points;
+                selectedCount--;
+            } else {
+                // Select: add class, add points
+                card.classList.add("selected");
+                card.setAttribute("aria-pressed", "true");
+                totalScore += points;
+                selectedCount++;
+            }
+
+            // Clamp score to zero
+            if (totalScore < 0) { totalScore = 0; }
+
+            updateFeedback();
+        }
+
+        // Update feedback area and background based on current score
+        function updateFeedback() {
+            var feedbackArea = document.getElementById("feedback-area");
+            var levelEl      = document.getElementById("impact-level");
+            var scoreEl      = document.getElementById("score-text");
+            var messageEl    = document.getElementById("impact-message");
+
+            var level, message, bgImage;
+
+            if (totalScore === 0) {
+                // No actions selected
+                level   = "—";
+                message = "Select some actions above to see your impact!";
+                bgImage = backgrounds.none;
+                feedbackArea.style.background = "var(--white)";
+
+            } else if (totalScore <= 7) {
+                // Low impact: 1-7 pts
+                level   = "🌱 Low Impact";
+                message = "Good start! Every action counts. Try adding a few more to increase your impact.";
+                bgImage = backgrounds.low;
+                feedbackArea.style.background = "#fff8f0";
+
+            } else if (totalScore <= 14) {
+                // Medium impact: 8-14 pts
+                level   = "⚡ Medium Impact";
+                message = "Great effort! You're making a real difference. Keep pushing for more actions!";
+                bgImage = backgrounds.medium;
+                feedbackArea.style.background = "#e8f5e9";
+
+            } else {
+                // High impact: 15+ pts
+                level   = "🌍 High Impact";
+                message = "Outstanding commitment! You are a Climate Action champion. Share this with others!";
+                bgImage = backgrounds.high;
+                feedbackArea.style.background = "#e0f2f1";
+            }
+
+            // Update feedback text via DOM
+            levelEl.textContent  = "Your Impact Level: " + level;
+            scoreEl.innerHTML    = "Selected actions: " + selectedCount +
+                                   " &nbsp;|&nbsp; Total impact score: <strong>" + totalScore + "</strong>";
+            messageEl.textContent = message;
+
+            // Set background image based on impact level
+            if (bgImage) {
+                document.body.style.backgroundImage    = "url('" + bgImage + "')";
+                document.body.style.backgroundSize     = "cover";
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundAttachment = "fixed";
+            } else {
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "var(--neutral-100)";
+            }
+        }
+
+        // Deselect all cards and reset score to initial state
+        function resetAll() {
+            var cards = document.querySelectorAll(".action-card");
+            cards.forEach(function(card) {
+                card.classList.remove("selected");
+                card.setAttribute("aria-pressed", "false");
+            });
+
+            totalScore    = 0;
+            selectedCount = 0;
+
+            document.body.style.backgroundImage = "none";
+            document.body.style.backgroundColor = "var(--neutral-100)";
+            updateFeedback();
+        }
+
+        // Keyboard accessibility: Enter/Space activates cards
+        document.querySelectorAll(".action-card").forEach(function(card) {
+            card.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

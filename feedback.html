@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimateAct - Feedback & Program Directory | SDG 13</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  
+  <style>
+    /* Page background*/
+    .feedback-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #0f4527 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .feedback-hero h1 { color: var(--white); margin-bottom: 0.75rem; }
+    .feedback-hero p { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; }
+
+    /* Filter dropdown */
+    .program-filter {
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--neutral-200);
+      font-family: var(--font-main);
+      background: var(--white);
+      cursor: pointer;
+      width: 220px;
+    }
+
+    /* Horizontal Scrollable Section */
+    .programs-scroll-section {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: visible;
+      gap: 1.5rem;
+      padding: 0.5rem 0.25rem 1rem 0.25rem;
+      margin-bottom: 2rem;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+
+    .programs-scroll-section::-webkit-scrollbar {
+      height: 8px;
+    }
+    .programs-scroll-section::-webkit-scrollbar-track {
+      background: var(--neutral-200);
+      border-radius: 10px;
+    }
+    .programs-scroll-section::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    /* Program Card Styling */
+    .program-card {
+      flex: 0 0 calc(33.333% - 1rem);
+      min-width: 280px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--neutral-200);
+      scroll-snap-align: start;
+    }
+
+    @media (max-width: 900px) {
+      .program-card { flex: 0 0 calc(50% - 0.75rem); }
+    }
+    @media (max-width: 600px) {
+      .program-card { flex: 0 0 calc(100% - 0rem); }
+    }
+
+    .program-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .program-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+    }
+
+    .program-card h3 {
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .program-card p {
+      font-size: 0.85rem;
+      color: var(--neutral-700);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .program-card button {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-main);
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .program-card button:hover {
+      background: var(--primary-dark);
+    }
+
+    .scroll-indicator {
+      text-align: center;
+      margin: 0.5rem 0 1.5rem;
+      font-size: 0.8rem;
+      color: var(--neutral-400);
+    }
+    .scroll-indicator span {
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
+
+    /* Rating Summary Section */
+    .rating-summary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .rating-number {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      color: var(--secondary);
+      display: inline-block;
+    }
+
+    .rating-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .review-count {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* ============================================
+       RANDOMLY FLOATING REVIEWS CARDS
+       Each card moves independently with slow animation
+       ============================================ */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--secondary);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      animation: floatRandom 6s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    /* Random float animations for each card - different speeds and distances */
+    .review-card:nth-child(1) { animation: float1 7s ease-in-out infinite; }
+    .review-card:nth-child(2) { animation: float2 8s ease-in-out infinite; }
+    .review-card:nth-child(3) { animation: float3 6.5s ease-in-out infinite; }
+    .review-card:nth-child(4) { animation: float4 9s ease-in-out infinite; }
+    .review-card:nth-child(5) { animation: float5 7.5s ease-in-out infinite; }
+    .review-card:nth-child(6) { animation: float6 8.5s ease-in-out infinite; }
+    .review-card:nth-child(7) { animation: float7 6s ease-in-out infinite; }
+    .review-card:nth-child(8) { animation: float8 7.2s ease-in-out infinite; }
+
+    /* Individual floating animations with random movements */
+    @keyframes float1 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      33% { transform: translateY(-8px) translateX(3px) rotate(0.5deg); }
+      66% { transform: translateY(4px) translateX(-2px) rotate(-0.3deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float2 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      35% { transform: translateY(6px) translateX(-3px) rotate(-0.4deg); }
+      70% { transform: translateY(-5px) translateX(2px) rotate(0.3deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float3 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      40% { transform: translateY(-6px) translateX(-2px) rotate(-0.2deg); }
+      80% { transform: translateY(3px) translateX(4px) rotate(0.4deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float4 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      30% { transform: translateY(7px) translateX(-4px) rotate(0.2deg); }
+      65% { transform: translateY(-4px) translateX(2px) rotate(-0.5deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float5 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      45% { transform: translateY(-5px) translateX(3px) rotate(0.6deg); }
+      75% { transform: translateY(2px) translateX(-3px) rotate(-0.2deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float6 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      38% { transform: translateY(4px) translateX(-5px) rotate(-0.4deg); }
+      72% { transform: translateY(-6px) translateX(2px) rotate(0.3deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float7 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      42% { transform: translateY(-7px) translateX(4px) rotate(0.5deg); }
+      78% { transform: translateY(3px) translateX(-2px) rotate(-0.3deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes float8 {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      50% { transform: translateY(5px) translateX(-3px) rotate(-0.4deg); }
+      75% { transform: translateY(-3px) translateX(2px) rotate(0.2deg); }
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    }
+
+    /* Hover effect overrides animation temporarily */
+    .review-card:hover {
+      animation-play-state: paused;
+      transform: translateY(-8px) scale(1.02) !important;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.2);
+      border-left-color: var(--primary);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    /* Subtle glow effect */
+    .review-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(46, 158, 91, 0.05) 0%, rgba(240, 165, 0, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .review-card:hover::before {
+      opacity: 1;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .review-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .review-card:hover .review-title {
+      color: var(--primary);
+    }
+
+    .review-rating {
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+
+    .review-card:hover .review-rating {
+      transform: scale(1.05);
+    }
+
+    .review-text {
+      font-size: 0.85rem;
+      color: var(--neutral-700);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+      transition: color 0.2s ease;
+    }
+
+    .review-card:hover .review-text {
+      color: var(--neutral-900);
+    }
+
+    .review-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--neutral-400);
+      border-top: 1px solid var(--neutral-200);
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .review-card:hover .review-meta {
+      border-top-color: var(--secondary);
+    }
+
+    .see-more {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .see-more::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .review-card:hover .see-more::after {
+      transform: translateX(4px);
+    }
+
+    .see-more:hover {
+      text-decoration: none;
+      color: var(--secondary);
+    }
+
+    /* Feedback Form Styling */
+    .feedback-form-section {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-top: 1rem;
+    }
+
+    .feedback-form-section h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    fieldset {
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    legend {
+      padding: 0 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--neutral-700);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .char-counter {
+      font-size: 0.7rem;
+      color: var(--neutral-400);
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+      border-color: var(--danger);
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.75rem 1.75rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .confirmation-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      margin-top: 1rem;
+      display: none;
+      text-align: center;
+    }
+
+    .confirmation-message.show {
+      display: block;
+    }
+
+    .form-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (Shared template) -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'">
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html" class="active">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <div class="feedback-hero">
+      <h1>Programmes & Feedback</h1>
+      <p>Discover climate action opportunities and share your experiences with the community</p>
+    </div>
+
+    <div class="container" style="padding: 2rem 1.5rem;">
+
+      <!-- Filter Dropdown -->
+      <select class="program-filter" aria-label="Filter programmes by category">
+        <option value="popular">Most Popular</option>
+        <option value="student">Student-friendly</option>
+        <option value="local">Local Opportunities</option>
+        <option value="online">Online Programmes</option>
+      </select>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator">
+        ← <span>←</span> Scroll to see more programmes <span>→</span> →
+      </div>
+
+      <!-- Horizontal Scrollable Section -->
+      <section class="programs-scroll-section" aria-label="Climate action programmes - scroll horizontally">
+
+        <div class="program-card">
+          <img src="https://i.pinimg.com/1200x/37/97/d5/3797d526f043ac30b5e715c6f9d9b962.jpg" alt="University students holding climate action posters" onerror="this.src='https://placehold.co/600x400/1a6b3c/fff?text=Green+Ambassador'">
+          <h2>Green Ambassador Programme</h2>
+          <p>Become a certified sustainability leader on your university campus. This programme trains students to run awareness campaigns, organise clean-up events, and advocate for greener policies within their institution. Ambassadors receive mentorship from sustainability professionals and build a portfolio of real-world impact.</p>
+          <button onclick="alert('Learn more about Green Ambassador Programme')">Learn More →</button>
+        </div>
+
+        <div class="program-card">
+          <img src="https://i.pinimg.com/1200x/58/a6/66/58a6662144abccd0b903e3e805be007e.jpg" alt="Students receiving carbon literacy certificates" onerror="this.src='https://placehold.co/600x400/0f4527/fff?text=Carbon+Literacy'">
+          <h2>Carbon Literacy Training</h2>
+          <p>Gain internationally recognised certification in climate knowledge through this one-day accredited course. You'll learn the science behind carbon emissions, understand how everyday choices contribute to your carbon footprint, and develop a personal action plan to reduce your impact.</p>
+          <button onclick="alert('Learn more about Carbon Literacy Training')">Learn More →</button>
+        </div>
+
+        <div class="program-card">
+          <img src="https://i.pinimg.com/736x/a6/3a/19/a63a19d854eda40041c3d475664720b5.jpg" alt="Participants collaborating on climate science cards" onerror="this.src='https://placehold.co/600x400/2e9e5b/fff?text=Climate+Fresk'">
+          <h2>Climate Fresk Workshop</h2>
+          <p>Join this interactive three-hour workshop that makes climate science accessible and engaging. Based on IPCC reports, participants work in small teams to connect cause-and-effect relationships of climate change using illustrated cards.</p>
+          <button onclick="alert('Learn more about Climate Fresk Workshop')">Learn More →</button>
+        </div>
+
+        <div class="program-card">
+          <img src="https://i.pinimg.com/736x/1e/2a/81/1e2a815116533e1c80243dab8caff4e1.jpg" alt="Student working on renewable energy project" onerror="this.src='https://placehold.co/600x400/1a6b3c/fff?text=Sustainability+Internship'">
+          <h2>Sustainability Internship Programme</h2>
+          <p>Apply for paid summer placements with leading environmental organisations, green startups, and corporate sustainability teams. Interns gain hands-on experience in renewable energy policy, circular economy innovation, and carbon accounting.</p>
+          <button onclick="alert('Learn more about Sustainability Internship Programme')">Learn More →</button>
+        </div>
+
+        <div class="program-card">
+          <img src="https://i.pinimg.com/736x/77/67/5b/77675b8533ae69153b6336e924bbe613.jpg" alt="Students sorting recyclable materials" onerror="this.src='https://placehold.co/600x400/0f4527/fff?text=Zero+Waste'">
+          <h2>Zero-Waste Campus Initiative</h2>
+          <p>Join this student-led movement working to eliminate single-use plastics and food waste across university facilities. Volunteers help coordinate recycling stations, run awareness campaigns, and collaborate with catering services.</p>
+          <button onclick="alert('Learn more about Zero-Waste Initiative')">Learn More →</button>
+        </div>
+
+      </section>
+
+      <!-- Rating Summary Section -->
+      <div class="rating-summary">
+        <span class="rating-number">8.7</span><span class="rating-label"> / 10</span>
+        <div class="rating-label" style="font-size: 1.1rem; margin-top: 0.25rem;">★★★★★</div>
+        <div class="review-count">Based on 187 verified reviews</div>
+        <div style="margin-top: 0.5rem; font-size: 0.85rem;">⭐ Excellent · Highly recommended by students</div>
+      </div>
+
+      <!-- Reviews Section - RANDOMLY FLOATING CARDS (8 total) -->
+      <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">What Students Say</h3>
+      <div class="reviews-grid">
+
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Life-changing experience!</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">The Carbon Literacy Training completely changed how I think about my daily habits. I've reduced my carbon footprint by 30% and now I'm helping my flatmates do the same. Highly recommend to any student wanting to make a real difference.</p>
+          <div class="review-meta">
+            <span>— Sarah M.</span>
+            <span>15 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Inspiring and practical</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">The Green Ambassador programme gave me the tools and confidence to lead climate campaigns on campus. The mentorship was invaluable and I've made connections that will help my career. Can't recommend it enough!</p>
+          <div class="review-meta">
+            <span>— James L.</span>
+            <span>8 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Accessible and engaging</span>
+            <span class="review-rating">★★★★☆</span>
+          </div>
+          <p class="review-text">The Climate Fresk workshop was a game-changer. I finally understand the science behind climate change in a way that feels accessible. The collaborative format made it fun and the insights I gained are now shaping my dissertation topic.</p>
+          <div class="review-meta">
+            <span>— Priya K.</span>
+            <span>2 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 4 - NEW -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Best decision I made</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">The Sustainability Internship opened doors I never imagined. I worked with a green tech startup and now have a job offer waiting after graduation. The hands-on experience and mentorship were absolutely invaluable for my career.</p>
+          <div class="review-meta">
+            <span>— Michael T.</span>
+            <span>22 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 5 - NEW -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Zero Waste changed my habits</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">Joining the Zero-Waste Initiative transformed how I shop, eat, and live. I've reduced my personal waste by 70% and inspired my whole accommodation to join the movement. The community aspect is what makes it special.</p>
+          <div class="review-meta">
+            <span>— Emma W.</span>
+            <span>18 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 6 - NEW -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Must-do for every student</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">Carbon Literacy should be mandatory for all university students. It's not just about learning facts - it's about understanding your power to create change. The certification also looks great on my CV and helped me land a sustainability role.</p>
+          <div class="review-meta">
+            <span>— David K.</span>
+            <span>12 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 7 - NEW -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Empowering and fun</span>
+            <span class="review-rating">★★★★☆</span>
+          </div>
+          <p class="review-text">The Climate Fresk workshop was surprisingly fun! I came in thinking it would be depressing, but left feeling empowered and equipped with actionable steps. The card-based learning made complex science easy to grasp.</p>
+          <div class="review-meta">
+            <span>— Olivia C.</span>
+            <span>5 March 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+        <!-- Review 8 - NEW -->
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-title">Networking goldmine</span>
+            <span class="review-rating">★★★★★</span>
+          </div>
+          <p class="review-text">The Green Ambassador programme connected me with professionals I never would have met otherwise. The networking events, guest speakers, and mentorship opportunities are incredible. I now have a clear career path in environmental policy.</p>
+          <div class="review-meta">
+            <span>— Aisha R.</span>
+            <span>28 February 2026</span>
+          </div>
+          <a href="#" class="see-more">See more</a>
+        </div>
+
+      </div>
+
+      <!-- Feedback Form Section -->
+      <div class="feedback-form-section">
+        <h3>Share Your Feedback</h3>
+        <p style="color: var(--neutral-600); margin-bottom: 1.5rem; font-size: 0.9rem;">We'd love to hear about your experience with our programmes or suggestions for improvement.</p>
+
+        <form id="feedbackForm" novalidate>
+          <fieldset>
+            <legend>Personal Details</legend>
+            <div class="form-two-col">
+              <div class="form-group">
+                <label for="fullname">Full Name *</label>
+                <input type="text" id="fullname" name="fullname" required>
+                <div class="error-message" id="fullnameError">Please enter your full name</div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Telephone Number</label>
+                <input type="tel" id="phone" name="phone">
+                <div class="error-message" id="phoneError"></div>
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="2" style="resize: vertical;"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Feedback Details</legend>
+            <div class="form-group">
+              <label for="programme">Which programme are you reviewing? *</label>
+              <select id="programme" name="programme" required>
+                <option value="">Select a programme</option>
+                <option value="ambassador">Green Ambassador Programme</option>
+                <option value="carbon">Carbon Literacy Training</option>
+                <option value="fresk">Climate Fresk Workshop</option>
+                <option value="internship">Sustainability Internship Programme</option>
+                <option value="zero">Zero-Waste Campus Initiative</option>
+                <option value="other">Other</option>
+              </select>
+              <div class="error-message" id="programmeError">Please select a programme</div>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date of Participation</label>
+              <input type="date" id="date" name="date">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Message / Comment *</label>
+              <textarea id="message" name="message" rows="4" maxlength="300" required style="resize: vertical;"></textarea>
+              <div class="char-counter">
+                <span id="charCount">0</span> / 300 characters
+              </div>
+              <div class="error-message" id="messageError">Please enter your feedback message</div>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="submit-btn">Submit Feedback</button>
+          <div id="confirmationMessage" class="confirmation-message">
+            ✅ Thank you for your feedback! Your input helps us improve our programmes.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Aryan Pratap Singh</h4>
+        <a href="pageEditor_ST3.html">Page Editor</a>
+        <a href="validation_ST3.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Aryan Pratap Singh · Student ID: w2121988 </span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript for form interactivity -->
+  <script>
+    // Live character counter
+    const messageInput = document.getElementById('message');
+    const charCountSpan = document.getElementById('charCount');
+
+    messageInput.addEventListener('input', function() {
+      const remaining = this.value.length;
+      charCountSpan.textContent = remaining;
+      
+      if (remaining > 280) {
+        charCountSpan.style.color = '#f0a500';
+      } else if (remaining > 290) {
+        charCountSpan.style.color = '#c0392b';
+      } else {
+        charCountSpan.style.color = 'var(--neutral-400)';
+      }
+    });
+
+    // Form validation and submission
+    const form = document.getElementById('feedbackForm');
+    const confirmationMsg = document.getElementById('confirmationMessage');
+
+    function showError(inputId, errorId, condition, message) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      
+      if (condition) {
+        input.classList.add('error');
+        error.textContent = message;
+        error.classList.add('show');
+        return false;
+      } else {
+        input.classList.remove('error');
+        error.classList.remove('show');
+        return true;
+      }
+    }
+
+    function validateForm() {
+      let isValid = true;
+      
+      const fullname = document.getElementById('fullname').value.trim();
+      if (showError('fullname', 'fullnameError', fullname === '', 'Please enter your full name')) {
+        isValid = false;
+      }
+      
+      const email = document.getElementById('email').value.trim();
+    }</script>

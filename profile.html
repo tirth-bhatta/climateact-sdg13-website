@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateAct - User Profile | SDG 13</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* Profile page specific styles */
+    .profile-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d4230 100%);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .profile-hero h1 { color: var(--white); margin-bottom: 0.3rem; }
+    .profile-hero p  { color: rgba(255,255,255,0.8); margin: 0; }
+
+    .progress-wrap {
+      background: #e0ede7;
+      border-radius: 30px;
+      height: 20px;
+      overflow: hidden;
+      margin: 0.5rem 0 0.3rem;
+      position: relative;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      border-radius: 30px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .step-indicators {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .step-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.7rem 1rem;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .step-btn:hover { background: var(--primary); color: var(--white); }
+    .step-btn.done  { background: var(--secondary); color: var(--white); border-color: var(--secondary); }
+    .step-btn.partial { background: var(--accent); color: var(--dark); border-color: var(--accent); }
+
+    .profile-output {
+      display: none;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-top: 1.5rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .profile-output.visible { display: block; }
+
+    .profile-section {
+      display: none;
+      border-left: 4px solid var(--secondary);
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+      animation: slideIn 0.35s ease;
+    }
+    .profile-section.visible { display: block; }
+
+    .profile-table { width: 100%; border-collapse: collapse; margin-top: 0.6rem; }
+    .profile-table td { padding: 0.45rem 0.8rem; font-size: 0.95rem; }
+    .profile-table td:first-child { font-weight: 600; color: var(--mid); width: 42%; }
+
+    .confirmation-banner {
+      display: none;
+      background: #d4edda;
+      border: 1px solid #28a745;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      color: #155724;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .confirmation-banner.visible { display: block; }
+
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 1.5rem 0;
+    }
+
+    .avatar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--white);
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-14px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER - MATCHING STUDENT 1'S TEMPLATE -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="profile-hero">
+      <div class="avatar-circle" id="avatarCircle" aria-hidden="true">👤</div>
+      <h1>Build Your Climate Profile</h1>
+      <p>Answer a few questions and we'll create your personalised SDG 13 action profile.</p>
+    </div>
+
+    <section aria-label="Profile completion progress">
+      <h2>Your Progress</h2>
+
+      <div class="step-indicators" id="stepIndicators">
+        <button class="step-btn" id="statusStep1">Step 1: Personal Details</button>
+        <button class="step-btn" id="statusStep2">Step 2: Climate Interests</button>
+        <button class="step-btn" id="statusStep3">Step 3: Actions & Commitments</button>
+      </div>
+
+      <div class="progress-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p id="progressLabel" style="font-size:0.9rem; color:var(--mid);">0% complete — click "Start Profile" to begin.</p>
+    </section>
+
+    <div class="control-row">
+      <button class="btn btn-primary" id="btnStart" onclick="startProfile()">Start / Continue Profile</button>
+      <button class="btn btn-secondary" id="btnReset" onclick="resetProfile()">Reset Profile</button>
+      <button class="btn" style="border:2px solid var(--primary);color:var(--primary);background:transparent;" onclick="revisitStep(1)">Revisit Step 1</button>
+      <button class="btn" style="border:2px solid var(--primary);color:var(--primary);background:transparent;" onclick="revisitStep(2)">Revisit Step 2</button>
+      <button class="btn" style="border:2px solid var(--primary);color:var(--primary);background:transparent;" onclick="revisitStep(3)">Revisit Step 3</button>
+    </div>
+
+    <section id="profileOutput" class="profile-output" aria-live="polite">
+      <h2>🌿 Your Climate Action Profile</h2>
+      <div class="profile-section" id="profileStep1">
+        <h3>Personal Details</h3>
+        <table class="profile-table"><tbody id="tableStep1"></tbody></table>
+      </div>
+      <div class="profile-section" id="profileStep2">
+        <h3>Climate Interests & Preferences</h3>
+        <table class="profile-table"><tbody id="tableStep2"></tbody></table>
+      </div>
+      <div class="profile-section" id="profileStep3">
+        <h3>Actions & Commitments</h3>
+        <table class="profile-table"><tbody id="tableStep3"></tbody></table>
+      </div>
+    </section>
+
+    <div class="confirmation-banner" id="confirmationBanner" role="alert">
+      ✅ Profile complete! Thank you for your climate commitments.
+    </div>
+  </main>
+
+  <!-- FOOTER - MATCHING STUDENT 1'S TEMPLATE -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Himanshu Narayan Shrestha</h4>
+        <a href="pageEditor_ST4.html">Page Editor</a>
+        <a href="validation_ST4.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Himanshu Narayan Shrestha · w2122002</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+  <script>
+    // [Keep ALL your existing JavaScript code exactly as it was]
+    // The JavaScript from your original profile.html remains unchanged
+    const profileData = {
+      step1: { name: null, username: null, location: null },
+      step2: { sdgFocus: null, preferredAction: null, weeklyTime: null },
+      step3: { pledge1: null, pledge2: null, startDate: null }
+    };
+
+    const stepStatus = { 1: 'empty', 2: 'empty', 3: 'empty' };
+
+    const steps = [
+      { num: 1, label: 'Personal Details', fields: [
+        { key: 'name', question: 'Step 1 of 3 — Personal Details\n\nWhat is your full name?\n(Press Cancel to skip this question)' },
+        { key: 'username', question: 'What username would you like on your profile?\n(Press Cancel to skip)' },
+        { key: 'location', question: 'Which city or region are you based in?\n(Press Cancel to skip)' }
+      ], store: profileData.step1 },
+      { num: 2, label: 'Climate Interests', fields: [
+        { key: 'sdgFocus', question: 'Step 2 of 3 — Climate Interests\n\nWhich climate topic interests you most?\n(e.g. Renewable Energy, Ocean Protection, Reforestation)\n(Press Cancel to skip)' },
+        { key: 'preferredAction', question: 'How do you prefer to take action?\n(e.g. Volunteering, Reducing consumption, Advocacy, Research)\n(Press Cancel to skip)' },
+        { key: 'weeklyTime', question: 'How many hours per week can you dedicate to climate action?\n(e.g. 1, 3, 5+)\n(Press Cancel to skip)' }
+      ], store: profileData.step2 },
+      { num: 3, label: 'Actions & Commitments', fields: [
+        { key: 'pledge1', question: 'Step 3 of 3 — Actions & Commitments\n\nWhat is one concrete action you will take this month for the climate?\n(e.g. Switch to a green energy tariff)\n(Press Cancel to skip)' },
+        { key: 'pledge2', question: 'What is a second climate commitment you will make?\n(e.g. Go car-free one day per week)\n(Press Cancel to skip)' },
+        { key: 'startDate', question: 'When will you start these commitments?\n(e.g. Next Monday, 20 March 2026)\n(Press Cancel to skip)' }
+      ], store: profileData.step3 }
+    ];
+
+    function startProfile() {
+      let nextStep = null;
+      for (let i = 1; i <= 3; i++) {
+        if (stepStatus[i] !== 'full') { nextStep = i; break; }
+      }
+      if (nextStep === null) {
+        alert('Your profile is already complete! You can revisit any step to update information.');
+        return;
+      }
+      runStep(nextStep);
+    }
+
+    function runStep(num) {
+      const step = steps[num - 1];
+      let answered = 0;
+
+      for (const field of step.fields) {
+        if (step.store[field.key] !== null) {
+          const keep = confirm(`"${fieldLabel(field.key)}" already has a value: "${step.store[field.key]}"\n\nClick OK to keep it, or Cancel to change it.`);
+          if (keep) { answered++; continue; }
+        }
+
+        const answer = prompt(field.question);
+        if (answer === null || answer.trim() === '') {
+          step.store[field.key] = null;
+        } else {
+          step.store[field.key] = answer.trim();
+          answered++;
+        }
+      }
+
+      const total = step.fields.length;
+      if (answered === 0) {
+        if (stepStatus[num] !== 'full') stepStatus[num] = 'empty';
+      } else if (answered < total) {
+        stepStatus[num] = 'partial';
+      } else {
+        stepStatus[num] = 'full';
+      }
+
+      updateProgressUI();
+      renderProfile();
+    }
+
+    function revisitStep(num) { runStep(num); }
+
+    function resetProfile() {
+      if (!confirm('Are you sure you want to reset your entire profile?')) return;
+      for (const key of Object.keys(profileData.step1)) profileData.step1[key] = null;
+      for (const key of Object.keys(profileData.step2)) profileData.step2[key] = null;
+      for (const key of Object.keys(profileData.step3)) profileData.step3[key] = null;
+      stepStatus[1] = stepStatus[2] = stepStatus[3] = 'empty';
+      updateProgressUI();
+      renderProfile();
+      document.getElementById('profileOutput').classList.remove('visible');
+      document.getElementById('confirmationBanner').classList.remove('visible');
+      document.getElementById('avatarCircle').textContent = '👤';
+    }
+
+    function updateProgressUI() {
+      let score = 0;
+      for (let i = 1; i <= 3; i++) {
+        if (stepStatus[i] === 'full') score += 2;
+        else if (stepStatus[i] === 'partial') score += 1;
+      }
+      const pct = Math.round((score / 6) * 100);
+      const bar = document.getElementById('progressBar');
+      bar.style.width = pct + '%';
+      bar.closest('[role="progressbar"]').setAttribute('aria-valuenow', pct);
+      document.getElementById('progressLabel').textContent = pct + '% complete — ' + (pct === 0 ? 'click "Start / Continue Profile" to begin.' : pct < 50 ? 'great start! Continue to add more details.' : pct < 100 ? 'almost there! Revisit any step to finish.' : 'profile fully complete! 🎉');
+
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById('statusStep' + i);
+        btn.className = 'step-btn';
+        if (stepStatus[i] === 'full') {
+          btn.classList.add('done');
+          btn.textContent = 'Step ' + i + ': ' + steps[i - 1].label + ' ✓';
+        } else if (stepStatus[i] === 'partial') {
+          btn.classList.add('partial');
+          btn.textContent = 'Step ' + i + ': ' + steps[i - 1].label + ' (partial)';
+        } else {
+          btn.textContent = 'Step ' + i + ': ' + steps[i - 1].label;
+        }
+      }
+
+      const allFull = stepStatus[1] === 'full' && stepStatus[2] === 'full' && stepStatus[3] === 'full';
+      document.getElementById('confirmationBanner').classList.toggle('visible', allFull);
+    }
+
+    function renderProfile() {
+      const hasAnyData = Object.values(profileData.step1).some(v => v !== null) ||
+        Object.values(profileData.step2).some(v => v !== null) ||
+        Object.values(profileData.step3).some(v => v !== null);
+      document.getElementById('profileOutput').classList.toggle('visible', hasAnyData);
+      renderStepSection(1, profileData.step1, [['Name', 'name'], ['Username', 'username'], ['Location', 'location']]);
+      renderStepSection(2, profileData.step2, [['Climate Focus', 'sdgFocus'], ['Preferred Action', 'preferredAction'], ['Weekly Time', 'weeklyTime']]);
+      renderStepSection(3, profileData.step3, [['Commitment 1', 'pledge1'], ['Commitment 2', 'pledge2'], ['Start Date', 'startDate']]);
+      if (profileData.step1.name) {
+        document.getElementById('avatarCircle').textContent = profileData.step1.name.charAt(0).toUpperCase();
+      }
+    }
+
+    function renderStepSection(stepNum, data, fieldDefs) {
+      const hasData = Object.values(data).some(v => v !== null);
+      const section = document.getElementById('profileStep' + stepNum);
+      const tbody = document.getElementById('tableStep' + stepNum);
+      section.classList.toggle('visible', hasData);
+      tbody.innerHTML = '';
+      for (const [label, key] of fieldDefs) {
+        if (data[key] !== null) {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${label}</td><td>${escapeHtml(data[key])}</td>`;
+          tbody.appendChild(row);
+        }
+      }
+    }
+
+    function fieldLabel(key) {
+      const map = { name: 'Full Name', username: 'Username', location: 'Location', sdgFocus: 'Climate Focus', preferredAction: 'Preferred Action', weeklyTime: 'Weekly Time', pledge1: 'Commitment 1', pledge2: 'Commitment 2', startDate: 'Start Date' };
+      return map[key] || key;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+
+</body>
+</html>

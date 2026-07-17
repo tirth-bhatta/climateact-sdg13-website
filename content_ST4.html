@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimateAct - Student Climate Action | SDG 13</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* ============================================
+       CONTENT PAGE STYLES - Matching Homepage Theme
+       Earthy green tones with amber accents
+       ============================================ */
+
+    /* Hero Section */
+    .content-hero {
+      background: linear-gradient(135deg, #1a3a2a 0%, #0f2a1a 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(240, 165, 0, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(26, 58, 42, 0.3) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .content-hero h1 {
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .content-hero p {
+      color: rgba(255,255,255,0.85);
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #f0a500;
+      color: #1a3a2a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Content Layout - Two Column Grid */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Side Navigation - Matching card style */
+    .side-nav {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid #f0a500;
+    }
+
+    .side-nav h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f0a500;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-nav ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .side-nav ul li a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: #4a5a4a;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .side-nav ul li a:hover {
+      background: #f8f5ef;
+      color: #f0a500;
+      transform: translateX(5px);
+    }
+
+    /* Main Article Content */
+    .content-article {
+      overflow-x: hidden;
+    }
+
+    .content-article h1 {
+      color: #1a4a2a;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+    }
+
+    .content-article > p {
+      color: #6a7a6a;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(240, 165, 0, 0.3);
+    }
+
+    /* Article Sections */
+    .content-article section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 90px;
+    }
+
+    .content-article section h2 {
+      color: #1a4a2a;
+      border-left: 4px solid #f0a500;
+      padding-left: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 1.5rem;
+      font-family: var(--font-display);
+    }
+
+    .content-article section h3 {
+      color: #2a6a3a;
+      margin: 1.25rem 0 0.75rem;
+      font-size: 1.2rem;
+      font-family: var(--font-display);
+    }
+
+    .content-article section p {
+      color: #4a5a4a;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /* Content Images */
+    .content-img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      margin: 1.25rem 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(240, 165, 0, 0.2);
+    }
+
+    .content-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+      border-color: #f0a500;
+    }
+
+    /* Image Caption */
+    .img-caption {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8a9a8a;
+      margin-top: -0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Fact Box */
+    .fact-box {
+      background: linear-gradient(135deg, #f8f5ef 0%, #ffffff 100%);
+      border-left: 4px solid #f0a500;
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.5rem;
+      margin: 1.25rem 0;
+      font-style: italic;
+      color: #4a5a4a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .fact-box p {
+      margin: 0;
+    }
+
+    /* Tip List - Matching homepage style */
+    .tip-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .tip-list li {
+      padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+      position: relative;
+      border-bottom: 1px solid #e8e0d5;
+      font-size: 0.9rem;
+      color: #4a5a4a;
+      line-height: 1.5;
+    }
+
+    .tip-list li::before {
+      content: '🌱';
+      position: absolute;
+      left: 0.3rem;
+      color: #f0a500;
+    }
+
+    .tip-list li strong {
+      color: #1a4a2a;
+    }
+
+    /* Button Container */
+    .button-group {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Go to Top Button */
+    .go-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #1a4a2a;
+      color: var(--white);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      z-index: 999;
+    }
+
+    .go-top:hover {
+      background: #f0a500;
+      color: #1a3a2a;
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .content-hero {
+        padding: 2rem 1rem;
+      }
+      
+      .content-layout {
+        padding: 1rem;
+      }
+      
+      .content-article h1 {
+        font-size: 1.6rem;
+      }
+      
+      .content-article section h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- HEADER - Matching homepage header -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section - Matching homepage style -->
+    <div class="content-hero">
+      <span class="hero-badge">📚 Student 4 · Content Page</span>
+      <h1>How Students Can Drive Climate Action</h1>
+      <p>Practical ways students can contribute to SDG 13 and make a real difference</p>
+    </div>
+
+    <div class="content-layout">
+
+      <!-- Side Navigation - Sticky -->
+      <aside class="side-nav" aria-label="Page sections navigation">
+        <h3>📑 ON THIS PAGE</h3>
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#why-matters">Why It Matters</a></li>
+          <li><a href="#student-actions">Student Actions</a></li>
+          <li><a href="#campus-impact">Campus Impact</a></li>
+          <li><a href="#global-context">Global Context</a></li>
+          <li><a href="#get-started">Get Started</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Article Content -->
+      <article class="content-article">
+
+        <h1 id="page-title">How Students Can Drive Climate Action</h1>
+        <p>SDG 13 – Climate Action | Written by Student 4</p>
+
+        <!-- SECTION 1: Introduction -->
+        <section id="introduction">
+          <h2>Introduction</h2>
+
+          <img class="content-img"
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80"
+            alt="Students gathered outside holding climate action signs at a campus rally">
+          <p class="img-caption">Figure 1: Students rallying for climate action on campus</p>
+
+          <p>Climate change is the defining challenge of our generation. The United Nations' Sustainable Development Goal 13 — Climate Action — calls on all parts of society to take urgent steps to combat climate change and its impacts. Yet the narrative around climate action often centres on governments and corporations, overlooking the immense power held by one group: students.</p>
+
+          <p>As a student, you are uniquely positioned to drive meaningful change. You are a consumer, a voter (or soon will be), a future professional, a community member, and a global citizen. Each of these roles gives you leverage that, when used collectively, can shift systems.</p>
+
+          <div class="fact-box">
+            <p>💡 "Young people are not just the leaders of tomorrow — they are the climate advocates of today. Student-led campaigns have influenced institutional policy, pushed universities to divest from fossil fuels, and changed the behaviour of millions."</p>
+          </div>
+        </section>
+
+        <!-- SECTION 2: Why It Matters -->
+        <section id="why-matters">
+          <h2>Why Climate Action Matters Right Now</h2>
+
+          <img class="content-img"
+            src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80"
+            alt="Aerial view of flooded city street showing the effects of extreme weather events">
+          <p class="img-caption">Figure 2: Extreme weather events are becoming more frequent and severe</p>
+
+          <p>The scientific evidence is unequivocal: global average temperatures have risen by over 1.1°C since pre-industrial times, and without rapid, far-reaching action, we are on track for catastrophic warming. This affects everything — food security, water availability, public health, biodiversity, and economic stability.</p>
+
+          <p>The impacts are not equally distributed. The communities least responsible for emissions are often the most vulnerable — coastal nations, low-income regions, and marginalised populations. This makes climate action not only an environmental issue but a social justice issue.</p>
+
+          <h3>Key facts students should know</h3>
+          <ul class="tip-list">
+            <li>The last decade (2011–2020) was the warmest on record globally.</li>
+            <li>Extreme weather events have increased in frequency and intensity.</li>
+            <li>Current pledges still put us on track for 2.5–3°C of warming by 2100.</li>
+            <li>A 1.5°C target requires reducing global emissions by 45% by 2030.</li>
+            <li>Renewable energy is now the cheapest source of electricity in history.</li>
+          </ul>
+        </section>
+
+        <!-- SECTION 3: Student Actions -->
+        <section id="student-actions">
+          <h2>Practical Actions Students Can Take</h2>
+
+          <img class="content-img"
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+            alt="Person cycling to university instead of driving, on a sunny morning">
+          <p class="img-caption">Figure 3: Sustainable transport choices make a real difference</p>
+
+          <p>You do not need to be a scientist or a politician to make a difference. The following are concrete, realistic actions students can start today:</p>
+
+          <h3>On campus</h3>
+          <ul class="tip-list">
+            <li>Join or start a student sustainability society.</li>
+            <li>Attend university meetings where sustainability policies are discussed.</li>
+            <li>Petition your institution to commit to net-zero operations by 2030.</li>
+            <li>Organise clothing swaps, repair cafés, or zero-waste events.</li>
+          </ul>
+
+          <h3>In your daily life</h3>
+          <ul class="tip-list">
+            <li>Switch to a plant-rich diet (biggest single individual impact).</li>
+            <li>Cycle, walk, or take public transport instead of driving.</li>
+            <li>Reduce energy use in your accommodation: shorter showers, unplug devices.</li>
+            <li>Buy second-hand clothing and electronics where possible.</li>
+            <li>Use a green energy provider or renewable energy tariff.</li>
+          </ul>
+
+          <h3>Digitally and politically</h3>
+          <ul class="tip-list">
+            <li>Follow credible climate scientists and journalists — not just viral posts.</li>
+            <li>Vote in every election; research candidates' climate commitments.</li>
+            <li>Write to your local representative about climate policy.</li>
+            <li>Share accurate, evidence-based climate information online.</li>
+          </ul>
+        </section>
+
+        <!-- SECTION 4: Campus Impact -->
+        <section id="campus-impact">
+          <h2>Making Your Campus a Climate Leader</h2>
+
+          <img class="content-img"
+            src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80"
+            alt="Solar panels installed on the roof of a modern university building">
+          <p class="img-caption">Figure 4: Solar panels on campus buildings reduce carbon footprint</p>
+
+          <p>Universities are large institutions with significant carbon footprints, but they also hold extraordinary potential for leadership. Students who engage with their institution's decision-making processes can drive transformative change.</p>
+
+          <p>Consider the following campus-level impacts that student campaigns have already achieved at UK universities:</p>
+
+          <ul class="tip-list">
+            <li>Multiple universities have committed to full fossil fuel divestment following sustained student pressure.</li>
+            <li>Student-led audits have identified energy waste worth tens of thousands of pounds annually.</li>
+            <li>Campus food waste campaigns have reduced cafeteria waste by up to 40% in pilot programmes.</li>
+            <li>Student transport surveys have led to improved cycle storage, changing facilities, and bus subsidies.</li>
+          </ul>
+
+          <div class="fact-box">
+            <p>🏛️ Your university's decisions today — on energy contracts, investment portfolios, supply chains, and travel policies — will shape emissions for decades. Your voice in those decisions matters enormously.</p>
+          </div>
+        </section>
+
+        <!-- SECTION 5: Global Context -->
+        <section id="global-context">
+          <h2>The Global Picture: You Are Part of Something Bigger</h2>
+
+          <p>SDG 13 is one of the 17 Sustainable Development Goals agreed by all 193 UN member states in 2015, forming the 2030 Agenda for Sustainable Development. It calls specifically for:</p>
+
+          <ul class="tip-list">
+            <li>Strengthening resilience and adaptive capacity to climate-related hazards.</li>
+            <li>Integrating climate change measures into national policies and planning.</li>
+            <li>Improving education and awareness around climate change mitigation.</li>
+            <li>Implementing the UN Framework Convention on Climate Change commitments.</li>
+          </ul>
+
+          <p>The Paris Agreement, signed in 2016, set the global target of limiting warming to well below 2°C, preferably 1.5°C. Progress depends on every country, every city, every institution — and every individual — doing their part.</p>
+
+          <p>Student movements like Fridays for Future, initiated by Greta Thunberg in 2018, have shown that young people can mobilise millions globally and shift the political conversation. Local action feeds into this global movement.</p>
+        </section>
+
+        <!-- SECTION 6: Get Started -->
+        <section id="get-started">
+          <h2>How to Get Started This Week</h2>
+
+          <p>Feeling overwhelmed? Start small. Here is a simple one-week plan any student can follow:</p>
+
+          <ul class="tip-list">
+            <li><strong>Day 1:</strong> Calculate your carbon footprint using a free online tool.</li>
+            <li><strong>Day 2:</strong> Identify your two largest sources of emissions.</li>
+            <li><strong>Day 3:</strong> Research one concrete swap you can make immediately.</li>
+            <li><strong>Day 4:</strong> Find your university's sustainability team or society and make contact.</li>
+            <li><strong>Day 5:</strong> Commit to one lifestyle change for the next 30 days.</li>
+            <li><strong>Day 6:</strong> Share what you've learned with one friend or family member.</li>
+            <li><strong>Day 7:</strong> Explore our Action Impact Simulator to see how your choices add up.</li>
+          </ul>
+
+          <div class="button-group">
+            <a href="ais.html" class="btn btn-primary">Try the Action Simulator →</a>
+            <a href="profile.html" class="btn btn-secondary">Build Your Climate Profile →</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- Go to Top Button -->
+  <a href="#top" class="go-top" aria-label="Go back to top of page" title="Back to top">↑</a>
+
+  <!-- FOOTER - Matching homepage footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action. We believe that informed individuals, empowered communities, and bold ideas can change the trajectory of our planet.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Student 4</h4>
+        <a href="pageEditor_ST4.html">Page Editor</a>
+        <a href="validation_ST4.html">Validation</a>
+        <a href="content_ST4.html">My Content Page</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Himanshu Narayan Shrestha · w2122002</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+</body>
+</html>

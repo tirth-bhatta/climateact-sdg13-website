@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateAct - Sitemap | SDG 13 Climate Action</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* ============================================
+       SITEMAP PAGE STYLES - Matching Homepage Theme
+       Earthy green tones with amber accents
+       ============================================ */
+
+    /* Page Hero Section */
+    .sitemap-hero {
+      background: linear-gradient(135deg, #1a3a2a 0%, #0f2a1a 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sitemap-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(240, 165, 0, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(26, 58, 42, 0.3) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .sitemap-hero h1 {
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .sitemap-hero p {
+      color: rgba(255,255,255,0.85);
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Badge (matching homepage) */
+    .hero-badge {
+      display: inline-block;
+      background: #f0a500;
+      color: #1a3a2a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    /* SVG Container */
+    .svg-container {
+      width: 100%;
+      overflow-x: auto;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .svg-container svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* SVG Node Hover & Focus Styles */
+    .node-link:hover .node-rect,
+    .node-link:focus .node-rect {
+      fill: #f0a500;
+      stroke: #1a4a2a;
+      stroke-width: 3;
+      transition: all 0.3s ease;
+    }
+
+    .node-link:hover .node-text,
+    .node-link:focus .node-text {
+      fill: #1a3a2a;
+      font-weight: bold;
+    }
+
+    .node-link:focus {
+      outline: 3px solid #f0a500;
+      outline-offset: 4px;
+    }
+
+    /* Node Colour Classes - Earthy theme */
+    .node-home   { fill: #1a4a2a; }
+    .node-splash { fill: #2a5a3a; }
+    .node-main   { fill: #2e7d5e; }
+    .node-sub    { fill: #3a8a6a; }
+    .node-shared { fill: #6ba57a; }
+
+    /* Connector Lines */
+    .connector {
+      stroke: #6a8a6a;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* Legend Section - Matching homepage card style */
+    .sitemap-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: #4a5a4a;
+    }
+
+    .legend-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Page Directory Section - Card style matching homepage */
+    .sitemap-info {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .sitemap-info h2 {
+      color: #1a4a2a;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sitemap-info > p {
+      color: #6a7a6a;
+      margin-bottom: 2rem;
+    }
+
+    /* Grid Layout for Page Directory - Matching card grid */
+    .page-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    /* Card Style - Matching homepage cards */
+    .page-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      background: var(--white);
+      padding: 1.2rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .page-list-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      background: #f8f5ef;
+      border-left: 4px solid #f0a500;
+    }
+
+    .page-list-item a {
+      text-decoration: none;
+      color: #1a3a2a;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .page-list-item:hover a {
+      color: #f0a500;
+    }
+
+    .page-icon {
+      font-size: 1.3rem;
+    }
+
+    /* Student Tags */
+    .student-tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      background: #e8e0d5;
+      color: #1a4a2a;
+      font-weight: 600;
+    }
+
+    .student-tag.st4 {
+      background: #f0a500;
+      color: #1a3a2a;
+    }
+
+    /* Animation for cards - matching homepage fade-in */
+    .page-list-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .page-list-item:nth-child(1) { animation-delay: 0.05s; }
+    .page-list-item:nth-child(2) { animation-delay: 0.1s; }
+    .page-list-item:nth-child(3) { animation-delay: 0.15s; }
+    .page-list-item:nth-child(4) { animation-delay: 0.2s; }
+    .page-list-item:nth-child(5) { animation-delay: 0.25s; }
+    .page-list-item:nth-child(6) { animation-delay: 0.3s; }
+    .page-list-item:nth-child(7) { animation-delay: 0.35s; }
+    .page-list-item:nth-child(8) { animation-delay: 0.4s; }
+    .page-list-item:nth-child(9) { animation-delay: 0.45s; }
+    .page-list-item:nth-child(10) { animation-delay: 0.5s; }
+    .page-list-item:nth-child(11) { animation-delay: 0.55s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Container and Section styling - matching homepage */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 2rem 0;
+    }
+
+    /* Section Heading - matching homepage */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-heading h2 {
+      color: #1a4a2a;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #f0a500;
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    .section-heading p {
+      color: #6a7a6a;
+      max-width: 600px;
+      margin: 1rem auto 0;
+      font-size: 0.95rem;
+    }
+
+    /* Button style - matching homepage */
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #1a4a2a;
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: #f0a500;
+      color: #1a3a2a;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .sitemap-hero {
+        padding: 2rem 1rem;
+      }
+      
+      .page-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .sitemap-legend {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER - Matching homepage header -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">Profile</a>
+        <a href="sitemap.html" class="active">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section - Matching homepage style -->
+    <div class="sitemap-hero">
+      <span class="hero-badge">🗺️ Site Navigation</span>
+      <h1>Website Sitemap</h1>
+      <p>A visual map of every page on the ClimateAct website. Click any node to visit that page. Use the Tab key to navigate between nodes with your keyboard.</p>
+    </div>
+
+    <div class="container">
+      <!-- Legend - Matching homepage card style -->
+      <div class="sitemap-legend" role="region" aria-label="Colour legend">
+        <div class="legend-item"><span class="legend-swatch" style="background:#1a4a2a;"></span> Home</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#2a5a3a;"></span> Splash Screen</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#2e7d5e;"></span> Main Pages</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#3a8a6a;"></span> Student 4 Pages</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#6ba57a;"></span> Shared / All Students</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#f0a500; border:1px solid #ccc;"></span> Current Page</div>
+      </div>
+
+      <!-- SVG Sitemap wrapper -->
+      <div class="svg-container" role="region" aria-label="Interactive SVG website sitemap">
+        <svg viewBox="0 0 860 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Website sitemap showing all pages and their relationships" font-family="'Source Sans 3', sans-serif">
+          <title>ClimateAct Website Sitemap</title>
+          <desc>Interactive sitemap showing the hierarchy and connections between all pages of the ClimateAct SDG 13 website.</desc>
+
+          <!-- Connector lines -->
+          <line class="connector" x1="120" y1="100" x2="430" y2="100"/>
+          <line class="connector" x1="430" y1="130" x2="430" y2="200"/>
+          <line class="connector" x1="80"  y1="215" x2="780" y2="215"/>
+          <line class="connector" x1="80"  y1="215" x2="80"  y2="240"/>
+          <line class="connector" x1="195" y1="215" x2="195" y2="240"/>
+          <line class="connector" x1="310" y1="215" x2="310" y2="240"/>
+          <line class="connector" x1="430" y1="215" x2="430" y2="240"/>
+          <line class="connector" x1="550" y1="215" x2="550" y2="240"/>
+          <line class="connector" x1="665" y1="215" x2="665" y2="240"/>
+          <line class="connector" x1="780" y1="215" x2="780" y2="240"/>
+          <line class="connector" x1="430" y1="310" x2="430" y2="360"/>
+          <line class="connector" x1="215" y1="375" x2="645" y2="375"/>
+          <line class="connector" x1="215" y1="360" x2="215" y2="375"/>
+          <line class="connector" x1="350" y1="360" x2="350" y2="375"/>
+          <line class="connector" x1="510" y1="360" x2="510" y2="375"/>
+          <line class="connector" x1="645" y1="360" x2="645" y2="375"/>
+          <line class="connector" x1="215" y1="375" x2="215" y2="395"/>
+          <line class="connector" x1="350" y1="375" x2="350" y2="395"/>
+          <line class="connector" x1="510" y1="375" x2="510" y2="395"/>
+          <line class="connector" x1="645" y1="375" x2="645" y2="395"/>
+          <line class="connector" x1="430" y1="460" x2="430" y2="490"/>
+          <line class="connector" x1="320" y1="490" x2="540" y2="490"/>
+          <line class="connector" x1="320" y1="490" x2="320" y2="510"/>
+          <line class="connector" x1="540" y1="490" x2="540" y2="510"/>
+
+          <!-- SPLASH SCREEN -->
+          <a href="splash.html" class="node-link" tabindex="0" aria-label="Splash Screen page">
+            <title>Splash Screen</title>
+            <rect class="node-rect node-splash" x="20" y="72" width="200" height="56" rx="10"/>
+            <text class="node-text" x="120" y="97" text-anchor="middle" fill="white" font-size="13" font-weight="600">Splash Screen</text>
+            <text class="node-text" x="120" y="116" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="10">splash.html</text>
+          </a>
+
+          <!-- HOME PAGE -->
+          <a href="home.html" class="node-link" tabindex="0" aria-label="Home Page">
+            <title>Home Page</title>
+            <rect class="node-rect node-home" x="350" y="72" width="160" height="56" rx="10"/>
+            <text class="node-text" x="430" y="97" text-anchor="middle" fill="white" font-size="14" font-weight="700">Home</text>
+            <text class="node-text" x="430" y="116" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="10">home.html</text>
+          </a>
+
+          <!-- ACTION SIMULATOR -->
+          <a href="ais.html" class="node-link" tabindex="0" aria-label="Action Impact Simulator page">
+            <title>Action Impact Simulator</title>
+            <rect class="node-rect node-main" x="30" y="240" width="140" height="56" rx="8"/>
+            <text class="node-text" x="100" y="263" text-anchor="middle" fill="white" font-size="11" font-weight="600">Action</text>
+            <text class="node-text" x="100" y="278" text-anchor="middle" fill="white" font-size="11" font-weight="600">Simulator</text>
+            <text class="node-text" x="100" y="292" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">ais.html</text>
+          </a>
+
+          <!-- GALLERY -->
+          <a href="gallery.html" class="node-link" tabindex="0" aria-label="Gallery page">
+            <title>Gallery</title>
+            <rect class="node-rect node-main" x="145" y="240" width="100" height="56" rx="8"/>
+            <text class="node-text" x="195" y="267" text-anchor="middle" fill="white" font-size="12" font-weight="600">Gallery</text>
+            <text class="node-text" x="195" y="287" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9">gallery.html</text>
+          </a>
+
+          <!-- FEEDBACK -->
+          <a href="feedback.html" class="node-link" tabindex="0" aria-label="Feedback and Program Directory page">
+            <title>Feedback &amp; Directory</title>
+            <rect class="node-rect node-main" x="255" y="240" width="110" height="56" rx="8"/>
+            <text class="node-text" x="310" y="263" text-anchor="middle" fill="white" font-size="11" font-weight="600">Feedback &amp;</text>
+            <text class="node-text" x="310" y="278" text-anchor="middle" fill="white" font-size="11" font-weight="600">Directory</text>
+            <text class="node-text" x="310" y="292" text-anchor="middle" fill="rgba(255,255,255,200)" font-size="9">feedback.html</text>
+          </a>
+
+          <!-- TEAM -->
+          <a href="team.html" class="node-link" tabindex="0" aria-label="Team page">
+            <title>Team</title>
+            <rect class="node-rect node-main" x="375" y="240" width="110" height="56" rx="8"/>
+            <text class="node-text" x="430" y="267" text-anchor="middle" fill="white" font-size="12" font-weight="600">Team</text>
+            <text class="node-text" x="430" y="287" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">team.html</text>
+          </a>
+
+          <!-- USER PROFILE -->
+          <a href="profile.html" class="node-link" tabindex="0" aria-label="User Profile page">
+            <title>User Profile</title>
+            <rect class="node-rect node-sub" x="495" y="240" width="110" height="56" rx="8"/>
+            <text class="node-text" x="550" y="263" text-anchor="middle" fill="white" font-size="12" font-weight="600">User Profile</text>
+            <text class="node-text" x="550" y="287" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">profile.html</text>
+          </a>
+
+          <!-- SITEMAP -->
+          <a href="sitemap.html" class="node-link" tabindex="0" aria-label="Sitemap page (current page)">
+            <title>Sitemap (current page)</title>
+            <rect class="node-rect node-sub" x="610" y="240" width="110" height="56" rx="8" stroke="#f0a500" stroke-width="2.5"/>
+            <text class="node-text" x="665" y="263" text-anchor="middle" fill="white" font-size="12" font-weight="600">Sitemap</text>
+            <text class="node-text" x="665" y="287" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">sitemap.html ★</text>
+          </a>
+
+          <!-- CONTENT PAGES -->
+          <a href="home.html" class="node-link" tabindex="0" aria-label="Content pages section">
+            <title>Content Pages — all four students</title>
+            <rect class="node-rect node-main" x="355" y="305" width="150" height="50" rx="8"/>
+            <text class="node-text" x="430" y="327" text-anchor="middle" fill="white" font-size="12" font-weight="600">Content Pages</text>
+            <text class="node-text" x="430" y="347" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">(all 4 students)</text>
+          </a>
+
+          <!-- Content ST1 -->
+          <a href="content_ST1.html" class="node-link" tabindex="0" aria-label="Content Page Student 1">
+            <title>Content Page – Student 1</title>
+            <rect class="node-rect node-shared" x="150" y="395" width="130" height="50" rx="8"/>
+            <text class="node-text" x="215" y="416" text-anchor="middle" fill="white" font-size="11" font-weight="600">Content – ST1</text>
+            <text class="node-text" x="215" y="435" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">content_ST1.html</text>
+          </a>
+
+          <!-- Content ST2 -->
+          <a href="content_ST2.html" class="node-link" tabindex="0" aria-label="Content Page Student 2">
+            <title>Content Page – Student 2</title>
+            <rect class="node-rect node-shared" x="285" y="395" width="130" height="50" rx="8"/>
+            <text class="node-text" x="350" y="416" text-anchor="middle" fill="white" font-size="11" font-weight="600">Content – ST2</text>
+            <text class="node-text" x="350" y="435" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">content_ST2.html</text>
+          </a>
+
+          <!-- Content ST3 -->
+          <a href="content_ST3.html" class="node-link" tabindex="0" aria-label="Content Page Student 3">
+            <title>Content Page – Student 3</title>
+            <rect class="node-rect node-shared" x="445" y="395" width="130" height="50" rx="8"/>
+            <text class="node-text" x="510" y="416" text-anchor="middle" fill="white" font-size="11" font-weight="600">Content – ST3</text>
+            <text class="node-text" x="510" y="435" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">content_ST3.html</text>
+          </a>
+
+          <!-- Content ST4 -->
+          <a href="content_ST4.html" class="node-link" tabindex="0" aria-label="Content Page Student 4">
+            <title>Content Page – Student 4</title>
+            <rect class="node-rect node-sub" x="580" y="395" width="130" height="50" rx="8"/>
+            <text class="node-text" x="645" y="416" text-anchor="middle" fill="white" font-size="11" font-weight="600">Content – ST4</text>
+            <text class="node-text" x="645" y="435" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">content_ST4.html</text>
+          </a>
+
+          <!-- Page Editors -->
+          <a href="pageEditor_ST4.html" class="node-link" tabindex="0" aria-label="Page Editor pages (one per student)">
+            <title>Page Editors – all students</title>
+            <rect class="node-rect" x="245" y="510" width="150" height="22" rx="6" fill="#6ba57a"/>
+            <text class="node-text" x="320" y="526" text-anchor="middle" fill="white" font-size="10">Page Editors (×4)</text>
+          </a>
+
+          <!-- Validation Pages -->
+          <a href="validation_ST4.html" class="node-link" tabindex="0" aria-label="Validation pages (one per student)">
+            <title>Validation Pages – all students</title>
+            <rect class="node-rect" x="465" y="510" width="150" height="22" rx="6" fill="#6ba57a"/>
+            <text class="node-text" x="540" y="526" text-anchor="middle" fill="white" font-size="10">Validation Pages (×4)</text>
+          </a>
+
+        </svg>
+      </div>
+    </div>
+
+    <!-- Page Directory Section - Matching homepage card style -->
+    <div class="sitemap-info">
+      <div class="section-heading">
+        <h2>Page Directory</h2>
+        <p>Quick links to all pages on the ClimateAct website. Pages marked • are implemented by Student 4.</p>
+      </div>
+
+      <ul class="page-list">
+        <li class="page-list-item">
+          <span class="page-icon">🚀</span>
+          <a href="splash.html">Splash Screen</a>
+          <span class="student-tag">ST2</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">🏠</span>
+          <a href="home.html">Home Page</a>
+          <span class="student-tag">ST1</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">⚡</span>
+          <a href="ais.html">Action Impact Simulator</a>
+          <span class="student-tag">ST2</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">🖼</span>
+          <a href="gallery.html">Gallery</a>
+          <span class="student-tag">ST1</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">💬</span>
+          <a href="feedback.html">Feedback &amp; Programs</a>
+          <span class="student-tag">ST3</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">👥</span>
+          <a href="team.html">Team Page</a>
+          <span class="student-tag">ST3</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">👤</span>
+          <a href="profile.html">User Profile •</a>
+          <span class="student-tag st4">ST4</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">🗺</span>
+          <a href="sitemap.html">Sitemap •</a>
+          <span class="student-tag st4">ST4</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">📄</span>
+          <a href="content_ST4.html">Content Page •</a>
+          <span class="student-tag st4">ST4</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">📝</span>
+          <a href="pageEditor_ST4.html">Page Editor •</a>
+          <span class="student-tag st4">ST4</span>
+        </li>
+        <li class="page-list-item">
+          <span class="page-icon">✅</span>
+          <a href="validation_ST4.html">Validation Page •</a>
+          <span class="student-tag st4">ST4</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- FOOTER - Matching homepage footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action. We believe that informed individuals, empowered communities, and bold ideas can change the trajectory of our planet.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Himanshu Narayan Shrestha</h4>
+        <a href="pageEditor_ST4.html">Page Editor</a>
+        <a href="validation_ST4.html">Validation</a>
+        <a href="content_ST4.html">My Content Page</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Himanshu Narayan Shrestha · w2122002</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+</body>
+</html>

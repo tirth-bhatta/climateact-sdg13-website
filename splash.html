@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Auto-redirect to home.html after 4 seconds -->
+    <meta http-equiv="refresh" content="4;url=home.html" id="metaRefresh">
+    <title>ClimateAct - Welcome | SDG 13 Climate Action</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+    <style>
+        /* ============================================
+           SPLASH SCREEN - Modern Centered Layout
+           Clean, professional, full-screen
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a2a1a 0%, #84a98c 50%, #0f2a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(240, 165, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76, 175, 80, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(240, 165, 0, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            animation: floatBg 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Main container - Perfectly centered */
+        .splash-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        /* Logo/Welcome Badge */
+        .welcome-badge {
+            display: inline-block;
+            background: rgba(240, 165, 0, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #f0a500;
+            text-transform: uppercase;
+            border: 1px solid rgba(240, 165, 0, 0.3);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        /* Main Title - Large and bold */
+        .site-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .site-title span {
+            color: #f0a500;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Decorative underline for title */
+        .title-underline {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #f0a500, #4caf50, #f0a500);
+            margin: 0.5rem auto 1.5rem;
+            border-radius: 3px;
+            animation: expandWidth 0.8s ease-out 0.3s forwards;
+            transform: scaleX(0);
+            transform-origin: center;
+        }
+
+        @keyframes expandWidth {
+            to { transform: scaleX(1); }
+        }
+
+        /* Tagline/Mission Statement */
+        .mission {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        /* Team Section - Clean card */
+        .members-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            margin: 1.5rem auto;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
+            transition: all 0.3s ease;
+        }
+
+        .members-section:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(240, 165, 0, 0.3);
+        }
+
+        .members-section h2 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f0a500;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .members-section p {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Loader Section */
+        .loader-wrapper {
+            margin: 2rem 0 1rem;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        /* CSS Spinner - Clean circular loader */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #f0a500;
+            border-right: 3px solid #4caf50;
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Countdown Timer */
+        .countdown-wrapper {
+            margin: 1rem 0;
+            animation: fadeInUp 0.6s ease-out 0.5s backwards;
+        }
+
+        .countdown-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+        }
+
+        #countdown-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f0a500;
+            display: inline-block;
+            min-width: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 20px;
+        }
+
+        /* Skip Button - Clean and modern */
+        .skip-wrapper {
+            margin-top: 1rem;
+            animation: fadeInUp 0.6s ease-out 0.6s backwards;
+        }
+
+        #skipBtn {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(240, 165, 0, 0.5);
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Source Sans 3', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        #skipBtn:hover {
+            background: #f0a500;
+            border-color: #f0a500;
+            color: #1a3a2a;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .splash-footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .splash-container {
+                padding: 1.5rem;
+            }
+            
+            .mission {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+            
+            .members-section {
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .members-section p {
+                font-size: 0.8rem;
+            }
+            
+            .title-underline {
+                width: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-badge {
+                font-size: 0.7rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .mission {
+                font-size: 0.85rem;
+            }
+            
+            .members-section p {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="splash-container">
+    <!-- Welcome Badge -->
+    <div class="welcome-badge">✦ WELCOME ✦</div>
+
+    <!-- Main Title -->
+    <h1 class="site-title">Climate<span>Act</span></h1>
+    <div class="title-underline"></div>
+
+    <!-- Mission Statement -->
+    <p class="mission">
+        Taking urgent action to combat climate change and its impacts.<br>
+        Together, we can build a sustainable future.
+    </p>
+
+    <!-- Team Section -->
+    <div class="members-section">
+        <h2>THE TEAM</h2>
+        <p>Deepak Kumar Raut · Tirth Raj Bhatta · Aryan Pratap Singh · Himanshu Shrestha</p>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrapper">
+        <p class="countdown-text">Entering site in <span id="countdown-number">4</span> seconds</p>
+    </div>
+
+    <!-- Skip Button -->
+    <div class="skip-wrapper">
+        <button id="skipBtn" onclick="skipIntro()">Skip Intro →</button>
+    </div>
+</div>
+
+<p class="splash-footer">University of Westminster · SDG 13 Climate Action · Web Design & Development 2025/26</p>
+
+<script>
+    // Countdown timer
+    let timeLeft = 4;
+    const countdownNumber = document.getElementById("countdown-number");
+
+    const timer = setInterval(function () {
+        timeLeft--;
+        
+        if (timeLeft > 0) {
+            countdownNumber.textContent = timeLeft;
+        } else if (timeLeft === 0) {
+            countdownNumber.textContent = "0";
+            clearInterval(timer);
+        }
+    }, 1000);
+
+    // Skip intro function
+    function skipIntro() {
+        clearInterval(timer);
+        const meta = document.getElementById("metaRefresh");
+        if (meta) {
+            meta.setAttribute("content", "9999;url=home.html");
+        }
+        window.location.href = "home.html";
+    }
+</script>
+
+</body>
+</html>

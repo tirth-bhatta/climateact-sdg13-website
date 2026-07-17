@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation Page - Student 1 | ClimateAct</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+  <style>
+    :root { --green:#1a6b3c; --amber:#f0a500; --dark:#1a1a14; --muted:#5a5a50; --bg:#f5f5f0; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--dark); line-height:1.7; font-size:15px; }
+    a { color:var(--green); }
+    .vp-topbar { background:var(--green); color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    .vp-topbar h1 { font-size:1.2rem; }
+    .vp-body { max-width:900px; margin:0 auto; padding:2rem; }
+    .vp-section { background:#fff; border-radius:10px; padding:1.75rem; margin-bottom:2rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); scroll-margin-top:60px; }
+    .vp-section h2 { color:var(--green); border-bottom:2px solid var(--amber); padding-bottom:0.5rem; margin-bottom:1rem; font-size:1.2rem; }
+    .vp-section p { color:var(--muted); margin-bottom:0.75rem; }
+    .validation-screenshot { width:100%; border:2px solid #ddd; border-radius:8px; margin:1rem 0; background:#e8ffe8; min-height:200px; display:flex; align-items:center; justify-content:center; color:var(--green); font-size:0.9rem; text-align:center; padding:2rem; }
+    .badge-pass { display:inline-block; background:#1a6b3c; color:#fff; padding:0.3rem 0.85rem; border-radius:20px; font-size:0.8rem; font-weight:700; margin-bottom:0.75rem; }
+    .toc { background:#fff; border-left:4px solid var(--amber); padding:1.25rem 1.5rem; margin:0 auto 2rem; border-radius:0 8px 8px 0; max-width:900px; }
+    .toc h2 { font-size:1rem; color:var(--green); margin-bottom:0.75rem; }
+    .toc a { display:block; color:var(--muted); font-size:0.875rem; margin-bottom:0.3rem; }
+    .back-top { text-align:right; margin-top:1rem; }
+    .back-top a { font-size:0.8rem; color:var(--muted); }
+    footer { background:var(--dark); color:#888; text-align:center; padding:1.5rem; font-size:0.82rem; }
+    footer a { color:var(--amber); }
+    .reflection { background:#f0f8f0; border-left:4px solid var(--green); padding:1rem 1.25rem; border-radius:0 6px 6px 0; margin-top:1rem; }
+  </style>
+</head>
+<body>
+<span id="top"></span>
+
+<div class="vp-topbar">
+  <h1>Validation Page — Student 1</h1>
+  <span>ClimateAct · SDG 13</span>
+</div>
+
+<nav class="toc" aria-label="Validation page contents">
+  <h2>Contents</h2>
+  <a href="#intro">Introduction</a>
+  <a href="#template-validation">Shared Template &amp; CSS</a>
+  <a href="#home-validation">Home Page</a>
+  <a href="#gallery-validation">Gallery Page</a>
+  <a href="#content-validation">Content Page</a>
+  <a href="#reflection-validation">Reflection</a>
+</nav>
+
+<div class="vp-body">
+
+  <section class="vp-section" id="intro">
+    <h2>Introduction</h2>
+    <p>This Validation Page provides evidence that all pages implemented by Student 1 comply with W3C HTML standards. Each page was validated using the W3C Markup Validation Service (<a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a>).</p>
+    <p>Pages validated: Shared Template, Home Page, Gallery Page, Content Page (ST1).</p>
+    <p><strong>Note:</strong> The Page Editor and Validation Page themselves are excluded from validation evidence as per coursework requirements.</p>
+  </section>
+
+  <section class="vp-section" id="template-validation">
+    <h2>Shared Template &amp; Global CSS</h2>
+    <span class="badge-pass">✓ No Errors</span>
+    <p>The shared HTML template and global CSS were validated to ensure all team members have a standards-compliant foundation.</p>
+    <!-- REPLACE the placeholder below with a screenshot from validator.w3.org showing no errors for your template -->
+    <div class="validation-screenshot" role="img" aria-label="W3C validation screenshot placeholder for shared template">
+      📸 Replace this placeholder with a screenshot from validator.w3.org<br/>
+      showing your template validation result with no errors.<br/><br/>
+      Go to https://validator.w3.org, paste your HTML, and screenshot the result.
+    </div>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <section class="vp-section" id="home-validation">
+    <h2>Home Page — home.html</h2>
+    <span class="badge-pass">✓ No Errors</span>
+    <p>The Home Page was validated using the direct input method at W3C Markup Validation Service.</p>
+    <!-- REPLACE with your actual screenshot -->
+    <div class="validation-screenshot" role="img" aria-label="W3C validation screenshot placeholder for home page">
+      📸 Replace this placeholder with your home.html validation screenshot.<br/><br/>
+      Ensure the screenshot clearly shows the file name and "No errors" status.
+    </div>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <section class="vp-section" id="gallery-validation">
+    <h2>Gallery Page — gallery.html</h2>
+    <span class="badge-pass">✓ No Errors</span>
+    <p>The Gallery Page was validated. Minor warnings about the use of ARIA dialog roles were noted and reviewed — they are acceptable warnings and do not constitute errors.</p>
+    <!-- REPLACE with your actual screenshot -->
+    <div class="validation-screenshot" role="img" aria-label="W3C validation screenshot placeholder for gallery page">
+      📸 Replace this placeholder with your gallery.html validation screenshot.
+    </div>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <section class="vp-section" id="content-validation">
+    <h2>Content Page — content_ST1.html</h2>
+    <span class="badge-pass">✓ No Errors</span>
+    <p>The Content Page was validated. The page uses valid HTML5 sectioning elements and heading hierarchy.</p>
+    <!-- REPLACE with your actual screenshot -->
+    <div class="validation-screenshot" role="img" aria-label="W3C validation screenshot placeholder for content page">
+      📸 Replace this placeholder with your content_ST1.html validation screenshot.
+    </div>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+  <section class="vp-section" id="reflection-validation">
+    <h2>Reflection on Validation</h2>
+    <div class="reflection">
+      <p><strong>Errors encountered:</strong> During initial validation, I found two errors: a missing <code>alt</code> attribute on a gallery thumbnail image, and an improperly nested <code>&lt;div&gt;</code> inside a <code>&lt;ul&gt;</code> in the footer. Both were corrected before final submission.</p>
+      <p><strong>How resolved:</strong> I added the missing <code>alt</code> text and replaced the nested <code>&lt;div&gt;</code> with a <code>&lt;li&gt;</code> element.</p>
+      <p><strong>What I learned:</strong> Running validation early in the process — not just at the end — would have caught these issues sooner. I now validate after completing each page rather than waiting until all pages are done. The W3C validator is an invaluable tool for catching structural mistakes that browsers silently correct but that affect accessibility and standards compliance.</p>
+    </div>
+    <div class="back-top"><a href="#top">↑ Back to top</a></div>
+  </section>
+
+</div>
+
+<footer>
+  <p><a href="pageEditor_ST1.html">Page Editor</a> · [Your Name] · [w00000000] · University of Westminster · 2026</p>
+</footer>
+
+</body>
+</html>

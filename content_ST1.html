@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateAct - The Science of Climate Change | SDG 13</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* Content page layout */
+    .content-hero {
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 3.5rem 1.5rem 2.5rem;
+    }
+
+    .content-hero h1 { color: var(--white); margin-bottom: 0.75rem; }
+    .content-hero p  { color: rgba(255,255,255,0.8); max-width: 600px; }
+
+    /* Two-column layout: sidebar nav + main article */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .content-layout { grid-template-columns: 1fr; }
+      #side-nav { display: none; }
+    }
+
+    /* Sticky sidebar navigation */
+    #side-nav {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+    }
+
+    #side-nav h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--neutral-400);
+      margin-bottom: 0.75rem;
+    }
+
+    #side-nav a {
+      display: block;
+      padding: 0.4rem 0.75rem;
+      border-left: 3px solid var(--neutral-200);
+      color: var(--neutral-700);
+      font-size: 0.875rem;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    #side-nav a:hover {
+      border-left-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Article sections */
+    .article-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 90px;
+    }
+
+    .article-section h2 {
+      color: var(--primary-dark);
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-section h3 {
+      color: var(--primary);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .article-section p {
+      color: var(--neutral-700);
+      line-height: 1.75;
+    }
+
+    /* Images with styling */
+    .content-img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      margin: 1.25rem 0;
+      border: 3px solid var(--neutral-200);
+    }
+
+    /* Image caption */
+    .img-caption {
+      font-size: 0.8rem;
+      color: var(--neutral-400);
+      text-align: center;
+      margin-top: -0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Fact box */
+    .fact-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .fact-box h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .fact-box p  { color: rgba(255,255,255,0.9); margin: 0; }
+
+    /* Go to top button - CSS only, position fixed */
+    #go-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      background: var(--primary);
+      color: var(--white);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+      z-index: 500;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    #go-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page top anchor -->
+  <span id="top"></span>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html"               >Home</a>
+        <a href="gallery.html"            >Gallery</a>
+        <a href="ais.html"                >Action Sim</a>
+        <a href="feedback.html"           >Feedback</a>
+        <a href="team.html"               >Team</a>
+        <a href="profile.html"            >Profile</a>
+        <a href="sitemap.html"            >Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page hero -->
+    <div class="content-hero">
+      <span class="gap-badge">Student 1 · Content Page</span>
+      <h1 class="mt-2">The Science of Climate Change</h1>
+      <p>Understanding the mechanisms, evidence, and projections behind one of the defining challenges of the 21st century.</p>
+    </div>
+
+    <!-- Two column layout -->
+    <div class="content-layout">
+
+      <!-- Sidebar internal navigation -->
+      <aside id="side-nav" aria-label="Page sections">
+        <h4>On this page</h4>
+        <a href="#greenhouse">Greenhouse Effect</a>
+        <a href="#evidence">Scientific Evidence</a>
+        <a href="#projections">Future Projections</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#student-action">Student Action</a>
+      </aside>
+
+      <!-- Main article content -->
+      <article>
+
+        <!-- Section 1 -->
+        <section class="article-section" id="greenhouse">
+          <h2>The Greenhouse Effect</h2>
+          <p>The Earth's climate is regulated by a natural greenhouse effect. Solar radiation passes through the atmosphere and warms the planet's surface. The surface then emits infrared radiation back outward, but certain gases — known as greenhouse gases (GHGs) — absorb and re-emit this energy, trapping heat in the lower atmosphere. This process is essential for life: without it, the Earth's average temperature would be approximately −18°C.</p>
+          <p>The problem is that human activities since the Industrial Revolution have dramatically increased the concentration of GHGs in the atmosphere, enhancing the greenhouse effect and causing the planet to warm beyond its natural equilibrium.</p>
+
+          <!-- Image 1 -->
+          <img class="content-img"
+               src="https://i.pinimg.com/736x/e0/8e/9e/e08e9e910bbdb282aa89f9ab09b21711.jpg"
+               alt="Diagram showing the greenhouse effect with solar radiation and heat trapping"
+               onerror="this.src='https://placehold.co/700x350/1a6b3c/fff?text=Greenhouse+Effect+Diagram'" />
+          <p class="img-caption">Figure 1: The enhanced greenhouse effect caused by rising CO₂ concentrations (illustrative diagram).</p>
+
+          <h3>Key Greenhouse Gases</h3>
+          <p>The main greenhouse gases driving human-caused warming are:</p>
+          <ul class="card-list" style="padding-left:1.2rem; list-style:disc; color: var(--neutral-700);">
+            <li><strong>Carbon dioxide (CO₂)</strong> — primarily from burning fossil fuels, deforestation, and cement production. Now at 420 ppm, the highest in 800,000 years.</li>
+            <li><strong>Methane (CH₄)</strong> — from agriculture (livestock, rice paddies), landfills, and natural gas leaks. About 80 times more potent than CO₂ over 20 years.</li>
+            <li><strong>Nitrous oxide (N₂O)</strong> — from agricultural soils and synthetic fertilisers.</li>
+            <li><strong>Fluorinated gases</strong> — industrial gases used in refrigeration and electronics, with very high warming potential.</li>
+          </ul>
+
+          <div class="fact-box">
+            <h4>Key Fact</h4>
+            <p>Atmospheric CO₂ concentrations have increased by over 50% since pre-industrial levels. The last time CO₂ was this high was more than 3 million years ago, when sea levels were 15–25 metres higher than today.</p>
+          </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="article-section" id="evidence">
+          <h2>Scientific Evidence</h2>
+          <p>The scientific consensus on human-caused climate change is overwhelming. Multiple independent lines of evidence from different disciplines all point to the same conclusion:</p>
+
+          <img class="content-img"
+               src="data:image/png;base64,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"
+               alt="Graph showing global average temperature rising from 1880 to present with a sharp increase after 1950"
+               onerror="this.src='https://placehold.co/700x350/0f4527/fff?text=Temperature+Record+Graph'" />
+          <p class="img-caption">Figure 2: Global average surface temperature anomaly, 1880–present. The trend is unambiguous.</p>
+
+          <h3>Temperature Records</h3>
+          <p>Global average temperatures have risen by approximately 1.1°C above pre-industrial levels (1850–1900 baseline). The last decade (2011–2020) was the warmest on record. Each of the last four decades has been successively warmer than any decade that preceded it since 1850.</p>
+
+          <h3>Ice Core Evidence</h3>
+          <p>Ice cores drilled in Antarctica and Greenland provide a continuous record of atmospheric composition going back 800,000 years. These records clearly show the natural cycles of glacial and interglacial periods, as well as the dramatic, unprecedented spike in greenhouse gas concentrations beginning with industrialisation.</p>
+
+          <h3>Sea Level Rise</h3>
+          <p>Global mean sea level has risen by about 20 cm since 1900, with the rate of rise accelerating. This is caused by two factors: thermal expansion of warming ocean water, and the melting of land-based ice sheets and glaciers.</p>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="article-section" id="projections">
+          <h2>Future Projections</h2>
+          <p>The Intergovernmental Panel on Climate Change (IPCC) publishes regular assessment reports synthesising the latest climate science. The projections are stark:</p>
+
+          <img class="content-img"
+               src="https://i.pinimg.com/736x/6c/a8/4a/6ca84ad60d1490f8b061d0ada6b7bfe3.jpg"
+               alt="IPCC climate scenario charts showing temperature projections under different emission pathways"
+               onerror="this.src='https://placehold.co/700x350/2e9e5b/fff?text=Climate+Projections'" />
+          <p class="img-caption">Figure 3: Temperature projections under different emissions scenarios (SSP pathways). Staying below 1.5°C requires rapid, deep cuts in emissions.</p>
+
+          <h3>1.5°C vs 2°C</h3>
+          <p>The Paris Agreement set a target of limiting warming to well below 2°C, and ideally 1.5°C, above pre-industrial levels. The difference between 1.5°C and 2°C may sound small, but it represents vastly different outcomes for ecosystems, human health, food security, and the frequency of extreme weather events. At 1.5°C, coral reefs face very high risk; at 2°C, the IPCC projects a near-complete loss of tropical coral ecosystems.</p>
+
+          <div class="fact-box">
+            <h4>The 2030 Window</h4>
+            <p>To have a reasonable chance of limiting warming to 1.5°C, global greenhouse gas emissions must be cut by approximately 45% by 2030 compared to 2010 levels, and reach net zero by around 2050. Current policies put the world on track for approximately 2.5–3°C of warming.</p>
+          </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="article-section" id="solutions">
+          <h2>Solutions and Technologies</h2>
+
+          <img class="content-img"
+               src="https://i.pinimg.com/1200x/77/86/ea/7786eaa49bbb5f1f5772b9ef27e4206e.jpg"
+               alt="Overview of climate solutions including solar panels wind turbines and electric vehicles"
+               onerror="this.src='https://placehold.co/700x350/1a6b3c/fff?text=Climate+Solutions'" />
+          <p class="img-caption">Figure 4: A transition to clean energy, sustainable transport, and regenerative land use is achievable with existing technologies.</p>
+
+          <h3>Energy System Transformation</h3>
+          <p>Decarbonising the electricity sector through rapid deployment of solar, wind, and other renewables is the single most impactful lever available. Battery storage, smart grids, and demand-side management are making this transition increasingly practical and affordable.</p>
+
+          <h3>Nature-Based Solutions</h3>
+          <p>Protecting and restoring forests, wetlands, grasslands, and coastal ecosystems can provide roughly 30% of the mitigation needed by 2030 while also delivering biodiversity and water security co-benefits. These solutions are available now, often cost-effective, and have community development benefits.</p>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="article-section" id="student-action">
+          <h2>Student Action</h2>
+          <p>Students are uniquely positioned to accelerate climate action — through personal choices, community engagement, and professional futures.</p>
+
+          <h3>On Campus</h3>
+          <ul class="card-list" style="list-style:disc; padding-left:1.2rem; color:var(--neutral-700);">
+            <li>Join or establish a student climate society</li>
+            <li>Advocate for your university to strengthen its sustainability commitments</li>
+            <li>Reduce energy use in student accommodation</li>
+            <li>Choose plant-rich options at university canteens</li>
+          </ul>
+
+          <h3>In Your Future Career</h3>
+          <p>Every profession will be reshaped by the transition to a low-carbon economy. Whether you enter engineering, finance, health, law, or the arts — there are opportunities to embed climate considerations into your work and contribute to systemic change.</p>
+
+          <a href="ais.html" class="btn btn-primary mt-2">Try the Action Impact Simulator →</a>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- Go to Top button (CSS only, no JS needed) -->
+  <a href="#top" id="go-top" aria-label="Go back to top of page" title="Back to top">↑</a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Student 1</h4>
+        <a href="pageEditor_ST1.html">Page Editor</a>
+        <a href="validation_ST1.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster ·Dipak Kumar Raut  · Student ID: w2121999</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+</body>
+</html>

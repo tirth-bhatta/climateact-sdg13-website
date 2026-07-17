@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimateAct - Our Team | SDG 13</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    /* Page-specific styles for Team page */
+    .team-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #0f4527 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .team-hero h1 { color: var(--white); margin-bottom: 0.75rem; }
+    .team-hero p { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; }
+
+    /* Team Grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Team Member Card */
+    .team-member {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .member-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: filter 0.3s ease;
+    }
+
+    .team-member:hover .member-image {
+      filter: brightness(0.9);
+    }
+
+    .member-info {
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .member-name {
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .member-role {
+      color: var(--secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Expandable Details Section - Hidden initially, shows on hover */
+    .member-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: var(--neutral-100);
+      border-top: 1px solid var(--neutral-200);
+    }
+
+    .team-member:hover .member-details {
+      max-height: 200px;
+    }
+
+    .member-details-content {
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--neutral-700);
+    }
+
+    .member-details-content h4 {
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .member-details-content ul {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .member-details-content li {
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+    }
+
+    .member-details-content p {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    /* Focus state for keyboard accessibility */
+    .team-member:focus {
+      outline: 3px solid var(--secondary);
+      outline-offset: 2px;
+      transform: translateY(-4px);
+    }
+
+    @media (max-width: 768px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (Shared template) -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'">
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Sim</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html" class="active">Team</a>
+        <a href="profile.html">Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <div class="team-hero">
+      <h1>Meet Our Team</h1>
+      <p>We are four students working together to promote climate action through education and engagement</p>
+    </div>
+
+    <div class="container">
+      <div class="team-grid">
+
+        <!-- Team Member 1 - Student 1 -->
+        <div class="team-member" tabindex="0" role="button" aria-label="View details about Student 1">
+          <img class="member-image" src="images/team-1.jpg" alt="Student 1 - Template and Home Page developer" onerror="this.src='https://placehold.co/400x400/1a6b3c/fff?text=Student+1'">
+          <div class="member-info">
+            <h2 class="member-name">Dipak Kumar Raut</h2>
+            <p class="member-role">Template & Home Page</p>
+          </div>
+          <div class="member-details">
+            <div class="member-details-content">
+              <h3>📋 Contributions</h3>
+              <ul>
+                <li>Shared HTML Template</li>
+                <li>Global CSS (style.css)</li>
+                <li>Home Page with hero section</li>
+                <li>Gallery Page with JavaScript modal</li>
+                <li>Navigation bar implementation</li>
+              </ul>
+              <p>🎯 Led the visual identity and ensured consistency across all pages.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 2 - Student 2 -->
+        <div class="team-member" tabindex="0" role="button" aria-label="View details about Student 2">
+          <img class="member-image" src="images/team-2.jpg" alt="Student 2 - Splash Screen and AIS developer" onerror="this.src='https://placehold.co/400x400/0f4527/fff?text=Student+2'">
+          <div class="member-info">
+            <h3 class="member-name">Tirth Raj Bhatta</h3>
+            <p class="member-role">Splash Screen & Action Simulator</p>
+          </div>
+          <div class="member-details">
+            <div class="member-details-content">
+              <h4>📋 Contributions</h4>
+              <ul>
+                <li>Splash Screen with 4-second redirect</li>
+                <li>CSS Loader Animation</li>
+                <li>Countdown Timer (JavaScript)</li>
+                <li>Action Impact Simulator (6+ action cards)</li>
+                <li>Impact calculation with background changes</li>
+              </ul>
+              <p>🎯 Created engaging interactive features to motivate climate action.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 3 - Student 3 -->
+        <div class="team-member" tabindex="0" role="button" aria-label="View details about Student 3">
+          <img class="member-image" src="images/team-3.jpg" alt="Student 3 - Feedback and Team page developer" onerror="this.src='https://placehold.co/400x400/2e9e5b/fff?text=Student+3'">
+          <div class="member-info">
+            <h3 class="member-name">Aryan Pratap Singh</h3>
+            <p class="member-role">Feedback & Team Pages</p>
+          </div>
+          <div class="member-details">
+            <div class="member-details-content">
+              <h4>📋 Contributions</h4>
+              <ul>
+                <li>Feedback & Program Directory page</li>
+                <li>Scrollable program cards section</li>
+                <li>Interactive feedback form with validation</li>
+                <li>Live character counter</li>
+                <li>Team Page with hover-expand details</li>
+                <li>Content Page on Sustainable Transport</li>
+              </ul>
+              <p>🎯 Built interactive features to collect user feedback and showcase team contributions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 4 - Student 4 -->
+        <div class="team-member" tabindex="0" role="button" aria-label="View details about Student 4">
+          <img class="member-image" src="images/team-4.jpg" alt="Student 4 - Profile and Sitemap developer" onerror="this.src='https://placehold.co/400x400/f0a500/1a1a14?text=Student+4'">
+          <div class="member-info">
+            <h3 class="member-name">Himanshu Shrestha</h3>
+            <p class="member-role">User Profile & Sitemap</p>
+          </div>
+          <div class="member-details">
+            <div class="member-details-content">
+              <h4>📋 Contributions</h4>
+              <ul>
+                <li>User Profile with JavaScript prompts</li>
+                <li>Progressive profile building (3 steps)</li>
+                <li>Profile completion progress indicator</li>
+                <li>SVG Sitemap with interactive nodes</li>
+                <li>Responsive SVG design</li>
+              </ul>
+              <p>🎯 Created interactive user experience and visual site navigation.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Aryan Pratap Singh</h4>
+        <a href="pageEditor_ST3.html">Page Editor</a>
+        <a href="validation_ST3.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Aryan Pratap Singh · Student ID: w2121988</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+</body>
+</html>

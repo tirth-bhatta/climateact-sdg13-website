@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateAct - Gallery | SDG 13 Climate Action</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific styles for Gallery -->
+  <style>
+    /* Gallery page accent colour */
+    .gallery-page-hero {
+      background: var(--primary);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .gallery-page-hero h1 { color: var(--white); }
+    .gallery-page-hero p  { color: rgba(255,255,255,0.82); max-width: 520px; margin: 0.75rem auto 0; }
+
+    /* Thumbnail grid */
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Individual thumbnail card */
+    .thumb-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 2px solid transparent;
+    }
+
+    .thumb-card:hover,
+    .thumb-card:focus {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+      outline: none;
+    }
+
+    .thumb-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0;
+      transition: filter 0.25s ease;
+    }
+
+    .thumb-card:hover img {
+      filter: brightness(0.88);
+    }
+
+    .thumb-label {
+      padding: 0.75rem 1rem;
+    }
+
+    .thumb-label h4 {
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .thumb-label span {
+      font-size: 0.8rem;
+      color: var(--neutral-400);
+    }
+
+    /* ===== MODAL / EXTENDED VIEW ===== */
+    #gallery-modal {
+      display: none; /* shown via JS */
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.75);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    #gallery-modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--neutral-200);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-700);
+      transition: background var(--transition);
+    }
+
+    .modal-close:hover { background: var(--neutral-400); color: var(--white); }
+
+    #modal-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .modal-content {
+      padding: 1.5rem 1.75rem 2rem;
+    }
+
+    .modal-content h2 {
+      color: var(--primary-dark);
+      margin-bottom: 0.75rem;
+      font-size: 1.4rem;
+    }
+
+    .modal-content p {
+      font-size: 0.95rem;
+      color: var(--neutral-700);
+    }
+
+    /* User customisation controls inside modal */
+    .modal-controls {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 1rem 1.75rem;
+      border-top: 1px solid var(--neutral-200);
+      background: var(--neutral-100);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    .modal-controls label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--neutral-700);
+    }
+
+    .modal-controls select {
+      padding: 0.3rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--neutral-200);
+      font-family: var(--font-main);
+      font-size: 0.82rem;
+      background: var(--white);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (same across all pages) -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="site-logo" aria-label="ClimateAct Home">
+        <img src="images/logo.png" alt="ClimateAct green leaf logo" onerror="this.style.display='none'" />
+        <div>
+          <div class="logo-text">ClimateAct</div>
+          <div class="logo-sub">SDG 13 · Climate Action</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="home.html"                >Home</a>
+        <a href="gallery.html"  class="active">Gallery</a>
+        <a href="ais.html"                 >Action Sim</a>
+        <a href="feedback.html"            >Feedback</a>
+        <a href="team.html"                >Team</a>
+        <a href="profile.html"             >Profile</a>
+        <a href="sitemap.html"             >Sitemap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page hero -->
+    <div class="gallery-page-hero">
+      <h1>Climate Action Gallery</h1>
+      <p>Explore images and stories about real-world climate action. Click any thumbnail for more detail.</p>
+    </div>
+
+    <!-- Thumbnail gallery -->
+    <section class="section">
+      <div class="container">
+        <div class="thumb-grid" id="thumbGrid" role="list" aria-label="Gallery thumbnails">
+
+          <!-- Thumbnail 1 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Solar Revolution"
+               data-id="0">
+            <img src="https://i.pinimg.com/736x/38/a7/d4/38a7d438b99c560bbed760297925ce7f.jpg"
+                 alt="Vast array of solar panels in a desert capturing renewable energy"
+                 onerror="this.src='https://placehold.co/400x300/1a6b3c/fff?text=Solar+Energy'" />
+            <div class="thumb-label">
+              <h4>The Solar Revolution</h4>
+              <span>Renewable Energy</span>
+            </div>
+          </div>
+
+          <!-- Thumbnail 2 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Reforestation Efforts"
+               data-id="1">
+            <img src="https://i.pinimg.com/736x/a9/ba/67/a9ba67fb65f515c536a2274de67c6b14.jpg"
+                 alt="Community volunteers planting trees in a deforested hillside"
+                 onerror="this.src='https://placehold.co/400x300/0f4527/fff?text=Reforestation'" />
+            <div class="thumb-label">
+              <h4>Reforestation Efforts</h4>
+              <span>Land & Ecosystems</span>
+            </div>
+          </div>
+
+          <!-- Thumbnail 3 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Zero-Emission Cities"
+               data-id="2">
+            <img src="https://i.pinimg.com/1200x/c8/68/b6/c868b6a7790a101afc9052e09b5dae36.jpg"
+                 alt="Electric trams and cyclists in a modern zero-emission city street"
+                 onerror="this.src='https://placehold.co/400x300/2e9e5b/fff?text=Zero+Emission+Cities'" />
+            <div class="thumb-label">
+              <h4>Zero-Emission Cities</h4>
+              <span>Urban Planning</span>
+            </div>
+          </div>
+
+          <!-- Thumbnail 4 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Ocean Acidification"
+               data-id="3">
+            <img src="https://i.pinimg.com/1200x/d5/66/30/d566306987b0500416ee74bb60fab55c.jpg"
+                 alt="Coral reef bleaching caused by rising ocean temperatures"
+                 onerror="this.src='https://placehold.co/400x300/f0a500/1a1a14?text=Ocean+Impact'" />
+            <div class="thumb-label">
+              <h4>Oceans Under Threat</h4>
+              <span>Marine Ecosystems</span>
+            </div>
+          </div>
+
+          <!-- Thumbnail 5 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Youth Climate Strikes"
+               data-id="4">
+            <img src="https://i.pinimg.com/1200x/f2/e8/9d/f2e89de7be674d41412da1d5ff18748f.jpg"
+                 alt="Young people holding climate action banners in a peaceful march"
+                 onerror="this.src='https://placehold.co/400x300/1a6b3c/fff?text=Youth+Action'" />
+            <div class="thumb-label">
+              <h4>Youth Climate Strikes</h4>
+              <span>Student Action</span>
+            </div>
+          </div>
+
+          <!-- Thumbnail 6 -->
+          <div class="thumb-card" role="listitem" tabindex="0"
+               aria-label="View details for Sustainable Farming"
+               data-id="5">
+            <img src="https://i.pinimg.com/1200x/3e/3d/34/3e3d34bbc823c07ea8311c8cdd4a6ac0.jpg"
+                 alt="Organic farm with vertical growing beds reducing food miles"
+                 onerror="this.src='https://placehold.co/400x300/0f4527/fff?text=Sustainable+Farming'" />
+            <div class="thumb-label">
+              <h4>Sustainable Farming</h4>
+              <span>Food Systems</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL (Extended View) ===== -->
+  <div id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close gallery detail view">✕</button>
+      <img id="modal-img" src="" alt="" />
+      <div class="modal-content" id="modal-text-area">
+        <h2 id="modal-title"></h2>
+        <p  id="modal-desc"></p>
+      </div>
+      <!-- User customisation controls - colour scheme and font -->
+      <div class="modal-controls">
+        <label for="colorScheme">Colour scheme:</label>
+        <select id="colorScheme" aria-label="Change colour scheme of modal content">
+          <option value="default">Default</option>
+          <option value="dark">Dark</option>
+          <option value="earthy">Earthy</option>
+          <option value="ocean">Ocean</option>
+        </select>
+
+        <label for="fontStyle">Font:</label>
+        <select id="fontStyle" aria-label="Change font style of modal content">
+          <option value="default">Default (Space Grotesk)</option>
+          <option value="serif">Serif (Playfair)</option>
+          <option value="mono">Monospace</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text">ClimateAct</div>
+        <p>A student project promoting SDG 13 — Climate Action.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">Action Simulator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="profile.html">User Profile</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+      <div class="footer-links">
+        <h4>Deepak kumar Raut</h4>
+        <a href="pageEditor_ST1.html">Page Editor</a>
+        <a href="validation_ST1.html">Validation</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ClimateAct · University of Westminster · Dipak Kumar Raut · Student ID: w2121999</span>
+      <a href="https://www.westminster.ac.uk/accessibility" target="_blank" rel="noopener">Accessibility Statement</a>
+    </div>
+  </footer>
+
+  <
+  <script>
+    // -----------------------------------------------
+    // Gallery data - extended descriptions per item
+    // -----------------------------------------------
+    const galleryData = [
+      {
+        title: "The Solar Revolution",
+        category: "Renewable Energy",
+        img: "images/gallery_1.jpg",
+        imgAlt: "Vast array of solar panels in a desert capturing renewable energy",
+        imgFallback: "https://placehold.co/700x280/1a6b3c/fff?text=Solar+Energy",
+        description: "Solar energy is now the cheapest electricity source in history, according to the International Energy Agency. Global solar capacity has doubled every two to three years since 2010. Rooftop solar installations are empowering households to generate their own power, reducing dependence on fossil fuels and cutting energy bills simultaneously. As battery storage technology improves, solar will become an even more dominant force in reaching net-zero targets set under SDG 13."
+      },
+      {
+        title: "Reforestation Efforts",
+        category: "Land & Ecosystems",
+        img: "images/gallery_2.jpg",
+        imgAlt: "Community volunteers planting trees in a deforested hillside",
+        imgFallback: "https://placehold.co/700x280/0f4527/fff?text=Reforestation",
+        description: "Forests are the lungs of the planet, absorbing billions of tonnes of CO2 each year. However, deforestation continues at an alarming rate. Community-led reforestation programmes, like the Bonn Challenge targeting 350 million hectares by 2030, demonstrate what is achievable when governments, NGOs, and citizens work together. Students can contribute by supporting local tree-planting initiatives and reducing consumption of products linked to deforestation."
+      },
+      {
+        title: "Zero-Emission Cities",
+        category: "Urban Planning",
+        img: "images/gallery_3.jpg",
+        imgAlt: "Electric trams and cyclists in a modern zero-emission city street",
+        imgFallback: "https://placehold.co/700x280/2e9e5b/fff?text=Zero+Emission+Cities",
+        description: "Cities produce over 70% of global CO2 emissions, but they are also at the forefront of climate solutions. From Oslo's electric vehicle network to Amsterdam's cycling infrastructure and Singapore's green buildings, cities worldwide are proving that sustainability and quality of life go hand in hand. Zero-emission transport, energy-efficient buildings, and urban green spaces are key pillars of the climate-friendly city of the future — and the decisions being made by planners today will shape life for decades."
+      },
+      {
+        title: "Oceans Under Threat",
+        category: "Marine Ecosystems",
+        img: "images/gallery_4.jpg",
+        imgAlt: "Coral reef bleaching caused by rising ocean temperatures",
+        imgFallback: "https://placehold.co/700x280/f0a500/1a1a14?text=Ocean+Impact",
+        description: "Oceans absorb about 30% of the CO2 produced by humans, leading to ocean acidification that threatens marine biodiversity. Rising sea temperatures have caused widespread coral bleaching, and the Great Barrier Reef has experienced multiple mass bleaching events since 2016. Protecting our oceans requires reducing carbon emissions globally, eliminating plastic pollution, and establishing more marine protected areas. As students, choosing sustainable seafood and reducing plastic use are concrete contributions."
+      },
+      {
+        title: "Youth Climate Strikes",
+        category: "Student Action",
+        img: "images/gallery_5.jpg",
+        imgAlt: "Young people holding climate action banners in a peaceful march",
+        imgFallback: "https://placehold.co/700x280/1a6b3c/fff?text=Youth+Action",
+        description: "The Fridays for Future movement, inspired by Greta Thunberg in 2018, mobilised millions of young people worldwide in the largest climate strikes in history. Student activism has pushed climate change to the top of the political agenda and forced corporations and governments to strengthen their climate commitments. Your voice matters — joining student climate societies, attending local council meetings, and contacting your representatives are all effective forms of civic action aligned with SDG 13."
+      },
+      {
+        title: "Sustainable Farming",
+        category: "Food Systems",
+        img: "images/gallery_6.jpg",
+        imgAlt: "Organic farm with vertical growing beds reducing food miles",
+        imgFallback: "https://placehold.co/700x280/0f4527/fff?text=Sustainable+Farming",
+        description: "Agriculture accounts for roughly 10–12% of global greenhouse gas emissions, but sustainable farming practices such as no-till agriculture, crop rotation, composting, and agroforestry can turn farms into carbon sinks. Urban vertical farms and community growing spaces are reducing food miles and reconnecting people with what they eat. As consumers, choosing locally grown, seasonal, and organic produce supports the transition to a food system that is both climate-friendly and equitable."
+      }
+    ];
+
+    // -----------------------------------------------
+    // Modal open/close logic
+    // -----------------------------------------------
+    const modal       = document.getElementById('gallery-modal');
+    const modalImg    = document.getElementById('modal-img');
+    const modalTitle  = document.getElementById('modal-title');
+    const modalDesc   = document.getElementById('modal-desc');
+    const closeBtn    = document.getElementById('modalCloseBtn');
+    const textArea    = document.getElementById('modal-text-area');
+    const colorSelect = document.getElementById('colorScheme');
+    const fontSelect  = document.getElementById('fontStyle');
+
+    // Open modal and populate with item data
+    function openModal(id) {
+      const item = galleryData[id];
+      if (!item) return;
+
+      // Populate modal content
+      modalImg.src   = item.img;
+      modalImg.alt   = item.imgAlt;
+      modalImg.onerror = function() { this.src = item.imgFallback; };
+      modalTitle.textContent = item.title;
+      modalDesc.textContent  = item.description;
+
+      // Reset customisation selects
+      colorSelect.value = 'default';
+      fontSelect.value  = 'default';
+      applyCustomisation();
+
+      // Show modal
+      modal.classList.add('open');
+      closeBtn.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Apply user-selected colour and font customisation
+    function applyCustomisation() {
+      const schemes = {
+        default: { bg: '#ffffff', color: '#1a1a14' },
+        dark:    { bg: '#1a1a14', color: '#f5f5f0' },
+        earthy:  { bg: '#f5ede0', color: '#3a2010' },
+        ocean:   { bg: '#e0f0f5', color: '#0a2a3a' }
+      };
+      const fonts = {
+        default: "'Space Grotesk', sans-serif",
+        serif:   "'Playfair Display', serif",
+        mono:    "monospace"
+      };
+
+      const scheme = schemes[colorSelect.value] || schemes.default;
+      const font   = fonts[fontSelect.value]    || fonts.default;
+
+      textArea.style.backgroundColor = scheme.bg;
+      textArea.style.color           = scheme.color;
+      textArea.style.fontFamily      = font;
+      modalTitle.style.color         = scheme.color;
+    }
+
+    // -----------------------------------------------
+    // Attach event listeners to thumbnails
+    // -----------------------------------------------
+    document.addEventListener('DOMContentLoaded', function () {
+      const thumbCards = document.querySelectorAll('.thumb-card');
+
+      thumbCards.forEach(function(card) {
+        // Click interaction
+        card.addEventListener('click', function() {
+          openModal(parseInt(this.dataset.id));
+        });
+
+        // Keyboard interaction (Enter / Space)
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(parseInt(this.dataset.id));
+          }
+        });
+
+        // Hover: JS adds class for any additional logic tracking
+        card.addEventListener('mouseenter', function() {
+          this.setAttribute('data-hovered', 'true');
+        });
+        card.addEventListener('mouseleave', function() {
+          this.removeAttribute('data-hovered');
+        });
+      });
+
+      // Close button listener
+      closeBtn.addEventListener('click', closeModal);
+
+      // Close on backdrop click
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+
+      // Customisation dropdowns
+      colorSelect.addEventListener('change', applyCustomisation);
+      fontSelect.addEventListener('change', applyCustomisation);
+    });
+  </script>
+
+</body>
+</html>

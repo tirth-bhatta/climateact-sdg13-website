@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation Page – Student 4 | ClimateAct</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/10004/10004493.png">
+
+  <style>
+    :root {
+      --primary: #1a6b4a; --secondary: #2ec4a0; --accent: #f4a11d;
+      --neutral: #f5f7f2; --dark: #1c2b22; --mid: #4a6558; --white: #ffffff;
+      --shadow: 0 4px 18px rgba(26,107,74,0.10); --radius: 10px;
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--neutral); color: var(--dark); line-height: 1.7; }
+    a { color: var(--secondary); } a:hover { color: var(--primary); }
+
+    .val-header {
+      background: var(--dark); color: white; padding: 1.5rem 2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;
+    }
+    .val-header h1 { font-family: var(--font-head); font-size: 1.5rem; color: var(--accent); }
+    .val-header nav a { color: rgba(255,255,255,0.8); margin-left: 1rem; font-size:0.9rem; font-weight:600; text-decoration:none; }
+
+    .val-layout { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; align-items: start; }
+    .val-nav { position: sticky; top: 20px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.2rem; }
+    .val-nav h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--secondary); margin-bottom: 0.8rem; }
+    .val-nav ul { list-style: none; }
+    .val-nav ul li { margin-bottom: 0.4rem; }
+    .val-nav ul li a { font-size: 0.88rem; font-weight: 600; color: var(--mid); display: block; padding: 0.3rem 0.5rem; border-radius: 5px; text-decoration: none; transition: background 0.2s; }
+    .val-nav ul li a:hover { background: var(--neutral); color: var(--primary); }
+
+    .val-content section { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 2rem; margin-bottom: 2rem; scroll-margin-top: 20px; }
+    .val-content h2 { font-family: var(--font-head); color: var(--primary); font-size: 1.4rem; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--secondary); }
+    .val-content h3 { color: var(--primary); font-size: 1.05rem; margin: 1rem 0 0.4rem; }
+    .val-content p, .val-content li { margin-bottom: 0.6rem; }
+
+    /* Validation result placeholder box */
+    .val-screenshot-box {
+      border: 2px dashed #b0cfc4;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      background: #f0f7f3;
+      color: var(--mid);
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+    .val-screenshot-box strong { display: block; font-size: 1rem; margin-bottom: 0.3rem; color: var(--primary); }
+
+    /* Status badge */
+    .status-pass { display: inline-block; background: #28a745; color: white; padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.82rem; font-weight: 600; margin-left: 0.5rem; }
+
+    /* Page link pill */
+    .page-pill { display: inline-block; background: var(--neutral); border: 1px solid #c5d9cf; border-radius: 20px; padding: 0.3rem 0.9rem; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: var(--primary); margin-bottom: 0.8rem; transition: background 0.2s; }
+    .page-pill:hover { background: var(--primary); color: white; text-decoration: none; }
+
+    /* Go to top */
+    .go-top { position: fixed; bottom: 2rem; right: 1.5rem; background: var(--primary); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+    .go-top:hover { background: var(--secondary); color: white; text-decoration: none; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,0.7); padding: 1.5rem 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.88rem; margin-top: 2rem; }
+    footer a { color: var(--secondary); }
+
+    @media (max-width: 700px) { .val-layout { grid-template-columns: 1fr; } .val-nav { position: static; } }
+  </style>
+</head>
+
+<body id="top">
+
+  <header class="val-header">
+    <div>
+      <h1>Validation Page — Student 4</h1>
+      <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">ClimateAct | SDG | University of Westminster</p>
+    </div>
+    <nav>
+      <a href="home.html">← Back to Site</a>
+      <a href="pageEditor_ST4.html">Page Editor</a>
+    </nav>
+  </header>
+
+  <div class="val-layout">
+
+    <!-- Sidebar nav -->
+    <aside class="val-nav" aria-label="Validation sections">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#val-intro">Introduction</a></li>
+        <li><a href="#val-profile">profile.html</a></li>
+        <li><a href="#val-sitemap">sitemap.html</a></li>
+        <li><a href="#val-content">content_ST4.html</a></li>
+        <li><a href="#val-reflection">Reflection</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main validation content -->
+    <main class="val-content">
+
+      <!-- Introduction -->
+      <section id="val-intro">
+        <h2>Introduction</h2>
+        <p>This Validation Page provides evidence that all web pages I implemented for the ClimateAct group project (Student 4) comply with W3C HTML standards. Validation was performed using the official W3C Markup Validation Service at <a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a>.</p>
+        <p>The pages validated are:</p>
+        <ul>
+          <li><a href="#val-profile">profile.html</a> — User Profile page</li>
+          <li><a href="#val-sitemap">sitemap.html</a> — SVG Sitemap page</li>
+          <li><a href="#val-content">content_ST4.html</a> — Individual Content page</li>
+        </ul>
+        <p>Note: The Page Editor and Validation Page themselves are excluded from validation evidence as per the coursework specification.</p>
+      </section>
+
+
+      <section id="val-profile">
+        <h2>User Profile Page — <code>profile.html</code> <span class="status-pass">✓ No Errors</span></h2>
+        <a href="profile.html" target="_blank" class="page-pill">View Live Page ↗</a>
+        <a href="pageEditor_ST4.html#profile-page" target="_blank" class="page-pill">Page Editor Section ↗</a>
+
+        <h3>Validation Evidence</h3>
+        <img src="profile validator.png"
+                alt="W3C validation result for profile.html – no errors"
+                 style="width: 100%; max-width: 800px; border-radius: 8px; box-shadow: 0 4px 10px rgba (0,0,0,0.1);"/>>
+        <h3>Notes</h3>
+        <p>The page uses <code>role="progressbar"</code> with ARIA attributes and <code>aria-live="polite"</code>. These generate no validation errors. JavaScript event handlers are attached inline via <code>onclick</code> attributes on button elements, which is valid HTML5. All <code>id</code> attributes are unique throughout the document.</p>
+      </section>
+
+      <section id="val-sitemap">
+        <h2>Sitemap Page — <code>sitemap.html</code> <span class="status-pass">✓ No Errors</span></h2>
+        <a href="sitemap.html" target="_blank" class="page-pill">View Live Page ↗</a>
+        <a href="pageEditor_ST4.html#sitemap-page" target="_blank" class="page-pill">Page Editor Section ↗</a>
+
+        <h3>Validation Evidence</h3>
+        <img src="Sitemap Validator.png"
+              alt="W3C validation result for content ST4.html-No erros"
+               style="width: 100%; max-width: 800px; border-radius: 8px; box-shadow: 0 4px 10px rgba (0,0,0,0.1);"/>
+
+        <h3>Notes</h3>
+        <p>The inline SVG uses the correct namespace (<code>xmlns="http://www.w3.org/2000/svg"</code>). All SVG <code>&lt;a&gt;</code> elements use <code>href</code> (not <code>xlink:href</code>, which is deprecated). SVG <code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code> elements are used for accessibility. Emoji characters in SVG <code>&lt;text&gt;</code> elements validate correctly as UTF-8.</p>
+      </section>
+
+      <!-- Validation: content_ST4.html -->
+      <section id="val-content">
+        <h2>Content Page — <code>content_ST4.html</code> <span class="status-pass">✓ No Errors</span></h2>
+        <a href="content_ST4.html" target="_blank" class="page-pill">View Live Page ↗</a>
+        <a href="pageEditor_ST4.html#content-page" target="_blank" class="page-pill">Page Editor Section ↗</a>
+
+        <h3>Validation Evidence</h3>
+        <img src="Content Validator.png"
+            alt="W3C validation result for content_ST4.html-No errors"
+            style="width: 100%; max-width: 800px; border-radius: 8px; box-shadow: 0 4px 10px rgba (0,0,0,0.1);"/>
+
+        <h3>Notes</h3>
+        <p>The page uses a CSS Grid layout via embedded CSS, which requires no special HTML and validates cleanly. The <code>scroll-margin-top</code> CSS property used in the embedded styles is valid CSS and does not affect HTML validation. All heading levels follow a strict logical hierarchy (<code>h1 → h2 → h3</code>) with no skipped levels.</p>
+      </section>
+
+      <!-- Reflection -->
+      <section id="val-reflection">
+        <h2>Reflection on the Validation Process</h2>
+
+        <h3>Errors encountered</h3>
+        <p>During initial validation of <code>profile.html</code>, the W3C validator flagged two issues:</p>
+        <ul>
+          <li>A missing <code>alt</code> attribute on the site logo SVG element — resolved by adding <code>aria-label</code> and <code>role="img"</code>.</li>
+          <li>An unclosed <code>&lt;div&gt;</code> in the footer section — resolved by correcting the HTML nesting.</li>
+        </ul>
+        <p>The <code>sitemap.html</code> initially produced a warning about <code>aria-label</code> on the SVG <code>&lt;a&gt;</code> elements; this was resolved by also adding a <code>&lt;title&gt;</code> child element inside each link group, which is the recommended SVG accessibility pattern.</p>
+
+        <h3>What I learned</h3>
+        <p>Running validation early and frequently is far more efficient than validating at the end. Small structural errors (missing closing tags, duplicate IDs) compound over time and become harder to trace. I also learned that SVG embedded in HTML5 follows slightly different rules from standalone SVG files — in particular, the <code>xmlns</code> attribute is optional but good practice, and <code>xlink:href</code> is deprecated in favour of plain <code>href</code>.</p>
+
+        <p>The validation process also prompted me to revisit my accessibility implementation, leading to improvements in ARIA attributes and focus states that I had initially overlooked.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Go to top -->
+  <a href="#top" class="go-top" aria-label="Back to top of page" title="Back to top">↑</a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <strong style="color:white;">Validation Page — Student 4</strong><br />
+      <span style="color:rgba(255,255,255,0.5); font-style:italic;">Himanshu Narayan Shrestha | w2122002 | 4COSC011W | 2025/26</span>
+    </div>
+    <div>
+      <a href="pageEditor_ST4.html">Page Editor</a> &nbsp;|&nbsp;
+      <a href="profile.html">User Profile</a> &nbsp;|&nbsp;
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+    <div>
+      <small>University of Westminster. Validated using <a href="https://validator.w3.org" target="_blank" rel="noopener">W3C Validator</a>.</small>
+    </div>
+  </footer>
+
+</body>
+</html>
